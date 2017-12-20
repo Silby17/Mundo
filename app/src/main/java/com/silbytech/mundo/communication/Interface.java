@@ -16,4 +16,11 @@ public interface Interface {
     @POST("/users/login/")
     Call<LoginResponse> userLogin(@Field("email") String email,
                                   @Field("password") String Password);
+
+    @FormUrlEncoded
+    @POST("/users/")
+    Call<LoginResponse> userSignUp(@Field("firstName") String firstName,
+                                   @Field("surname") String lastName,
+                                   @Field("email") String email,
+                                   @Field("password") String password);
 }

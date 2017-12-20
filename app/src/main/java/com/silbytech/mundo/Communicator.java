@@ -1,5 +1,6 @@
 package com.silbytech.mundo;
 
+import com.google.gson.Gson;
 import com.silbytech.mundo.communication.Interface;
 import com.silbytech.mundo.responses.LoginResponse;
 
@@ -22,5 +23,18 @@ public class Communicator {
 
         Interface comInter = retrofit.create(Interface.class);
         return comInter.userLogin(email, password);
+    }
+
+    Call<LoginResponse> userSignUp(String firstName, String surname, String email,
+                                   String password){
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl(HURL)
+                .addConverterFactory(GsonConverterFactory.create());
+
+        Retrofit retrofit = builder.build();
+
+        Interface comInterface = retrofit.create(Interface.class);
+        return comInterface.userSignUp(firstName, surname, email, password);
+
     }
 }
