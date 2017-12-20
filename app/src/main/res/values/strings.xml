@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Mundo</string>
+    <string name="email">Email</string>
+    <string name="password">Password</string>
+    <string name="mobileNumber">Mobile Number</string>
+    <string name="errorMissingInfo">Login credentials missing</string>
+</resources>
