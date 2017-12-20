@@ -1,0 +1,84 @@
+package com.silbytech.mundo;
+
+import android.app.Activity;
+import android.content.SharedPreferences;
+import android.os.Bundle;
+import android.view.View;
+import android.view.Window;
+import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
+import android.widget.Toast;
+
+import com.silbytech.mundo.responses.LoginResponse;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
+
+/************************************
+ * Created by Yosef Silberhaft
+ ************************************/
+public class SignUpActivity extends Activity {
+    private static String TAG = "SignUpActivity";
+    public static final String PREFS = "prefs";
+    private SharedPreferences preferences;
+    Button btnSignUp;
+
+    @Override
+    public void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+
+        //Show Window in full screen without status bar
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
+        setContentView(R.layout.sign_up_layout);
+
+        this.btnSignUp = findViewById(R.id.btnSignUp);
+
+        this.btnSignUp.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //Extracts the data from the users inputs
+                String firstName = ((EditText)findViewById(R.id.edtFirstName)).getText().toString();
+                String lastName = ((EditText)findViewById(R.id.edtLastName)).getText().toString();
+                String email = ((EditText)findViewById(R.id.edtEmail)).getText().toString();
+                String password = ((EditText)findViewById(R.id.edtPassword)).getText().toString();
+
+
+                if(firstName.equals("") || lastName.equals("")
+                        ||email.equals("") || password.equals("")){
+                    Toast.makeText(getApplicationContext(),
+                            R.string.errorMissingInfo, Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Communicator communicator = new Communicator();
+
+                    Call<LoginResponse> call = communicator.userSignUp(firstName, lastName, email, password);
+
+                    call.enqueue(new Callback<LoginResponse>() {
+                        @Override
+                        public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                            LoginResponse loginResponse = response.body();
+                            String fullName = loginResponse.getFirstName() + " " + loginResponse.getSurname();
+                            preferences = getSharedPreferences(PREFS, 0);
+                            preferences.edit().putBoolean("logged-in", true).apply();
+                            preferences.edit().putString("userId", loginResponse.getId()).apply();
+                            preferences.edit().putString("fullName", fullName).apply();
+                            preferences.edit().putString("token", response.headers().get("x-auth")).apply();
+                            System.out.println("Done");
+                        }
+
+                        @Override
+                        public void onFailure(Call<LoginResponse> call, Throwable t) {
+                            System.out.println("Failed");
+                        }
+                    });
+                }
+            }
+        });
+
+    }
+}
