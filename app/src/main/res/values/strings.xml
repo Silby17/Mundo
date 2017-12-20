@@ -4,4 +4,6 @@
     <string name="password">Password</string>
     <string name="mobileNumber">Mobile Number</string>
     <string name="errorMissingInfo">Login credentials missing</string>
+    <string name="firstName">First Name</string>
+    <string name="lastName">Last Name</string>
 </resources>
