@@ -39,11 +39,11 @@ public class SplashActivity extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),
                             "Welcome man!",
                             Toast.LENGTH_SHORT).show();
-                    Intent i = new Intent(SplashActivity.this, LoginActivity.class);
+                    Intent i = new Intent(SplashActivity.this, LandingActivity.class);
                     SplashActivity.this.startActivity(i);
                     finish();
                 } else {
-                    Intent i = new Intent(SplashActivity.this, LoginActivity.class);
+                    Intent i = new Intent(SplashActivity.this, LandingActivity.class);
                     SplashActivity.this.startActivity(i);
                     finish();
                 }
