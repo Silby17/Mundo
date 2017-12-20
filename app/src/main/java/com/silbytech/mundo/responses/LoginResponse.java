@@ -8,7 +8,7 @@ import java.io.Serializable;
  ************************************/
 public class LoginResponse implements Serializable {
 
-    @SerializedName("id")
+    @SerializedName("_id")
     private String id;
 
     @SerializedName("email")
@@ -18,16 +18,16 @@ public class LoginResponse implements Serializable {
     private String firstName;
 
     @SerializedName("surname")
-    private String lastname;
+    private String surname;
 
     @SerializedName("token")
     private String token;
 
-    public LoginResponse(String id, String email, String firstName, String lastname, String token) {
+    public LoginResponse(String id, String email, String firstName, String surname, String token) {
         this.id = id;
         this.email = email;
         this.firstName = firstName;
-        this.lastname = lastname;
+        this.surname = surname;
         this.token = token;
     }
 
@@ -55,12 +55,12 @@ public class LoginResponse implements Serializable {
         this.firstName = firstName;
     }
 
-    public String getLastname() {
-        return lastname;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setLastname(String lastname) {
-        this.lastname = lastname;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getToken() {
