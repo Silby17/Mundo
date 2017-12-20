@@ -1,6 +1,7 @@
 package com.silbytech.mundo;
 
 import android.app.Activity;
+import com.silbytech.mundo.responses.LoginResponse;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -9,6 +10,9 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /************************************
  * Created by Yosef Silberhaft
@@ -28,7 +32,7 @@ public class LoginActivity extends Activity {
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.login_layout);
 
-        this.btnLogin = (Button)findViewById(R.id.btnLogin);
+        this.btnLogin = findViewById(R.id.btnLogin);
 
         this.btnLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -41,6 +45,28 @@ public class LoginActivity extends Activity {
                             R.string.errorMissingInfo, Toast.LENGTH_SHORT).show();
                 }
                 else {
+
+                    Communicator communicator = new Communicator();
+                    Call<LoginResponse> call = communicator.userLogin(email, password);
+
+                    call.enqueue(new Callback<LoginResponse>() {
+                        @Override
+                        public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                            LoginResponse loginResponse = response.body();
+                            System.out.println("Worked");
+                            String fullName = loginResponse.getFirstName() + " " + loginResponse.getSurname();
+                            preferences = getSharedPreferences(PREFS, 0);
+                            preferences.edit().putString("userid", loginResponse.getId()).apply();
+                            preferences.edit().putString("fullName", fullName).apply();
+                            preferences.edit().putString("token", response.headers().get("x-auth")).apply();
+                        }
+
+                        @Override
+                        public void onFailure(Call<LoginResponse> call, Throwable t) {
+                            System.out.println("Failed");
+
+                        }
+                    });
 
                 }
             }
