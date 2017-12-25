@@ -18,6 +18,9 @@ public class Listing implements Serializable {
     @SerializedName("_creator")
     private String creatorId;
 
+    @SerializedName("title")
+    private String title;
+
     @SerializedName("category")
     private String category;
 
@@ -27,10 +30,11 @@ public class Listing implements Serializable {
     @SerializedName("price")
     private double price;
 
-    public Listing(String id, String imgUrl, String creatorId, String category, String description, double price) {
+    public Listing(String id, String imgUrl, String creatorId, String title, String category, String description, double price) {
         this.id = id;
         this.imgUrl = imgUrl;
         this.creatorId = creatorId;
+        this.title = title;
         this.category = category;
         this.description = description;
         this.price = price;
@@ -58,6 +62,14 @@ public class Listing implements Serializable {
 
     public void setCreatorId(String creatorId) {
         this.creatorId = creatorId;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getCategory() {
