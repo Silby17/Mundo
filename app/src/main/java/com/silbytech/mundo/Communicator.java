@@ -1,9 +1,16 @@
 package com.silbytech.mundo;
 
+import android.os.Message;
+
 import com.google.gson.Gson;
 import com.silbytech.mundo.communication.Interface;
+import com.silbytech.mundo.entities.ListingsArray;
 import com.silbytech.mundo.responses.LoginResponse;
+import com.silbytech.mundo.responses.MessageResponse;
 
+import java.util.Map;
+
+import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -14,13 +21,13 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class Communicator {
     private static final String TAG = "Communicator";
     private static final String HURL = "https://mundo-84767.herokuapp.com/";
+    //private static final String HURL = "http://192.168.1.14:3000";
 
     Call<LoginResponse> userLogin(String email, String password){
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(HURL)
                 .addConverterFactory(GsonConverterFactory.create());
         Retrofit retrofit = builder.build();
-
         Interface comInter = retrofit.create(Interface.class);
         return comInter.userLogin(email, password);
     }
@@ -30,11 +37,27 @@ public class Communicator {
         Retrofit.Builder builder = new Retrofit.Builder()
                 .baseUrl(HURL)
                 .addConverterFactory(GsonConverterFactory.create());
-
         Retrofit retrofit = builder.build();
-
         Interface comInterface = retrofit.create(Interface.class);
         return comInterface.userSignUp(firstName, surname, email, password);
+    }
 
+    Call<MessageResponse> uploadFIle(String desc, Map<String, RequestBody> map) {
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl(HURL)
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit = builder.build();
+        Interface comInterface = retrofit.create(Interface.class);
+        return comInterface.upload(desc, map);
+    }
+
+
+    Call<ListingsArray> getAllListings(){
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl(HURL)
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit = builder.build();
+        Interface comInterface = retrofit.create(Interface.class);
+        return comInterface.getAllListings();
     }
 }
