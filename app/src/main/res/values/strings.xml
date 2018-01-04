@@ -6,4 +6,21 @@
     <string name="errorMissingInfo">Login credentials missing</string>
     <string name="firstName">First Name</string>
     <string name="lastName">Last Name</string>
+    <string name="next">NEXT</string>
+    <string name="skip">SKIP</string>
+    <string name="proceed">PROCEED</string>
+    <string name="welcomeBack">Welcome Back!</string>
+    <string name="detailsError">Please check your credentials</string>
+    <string name="errorTryLater">Server Error, Please try later.</string>
+
+
+    <integer-array name="img_id_arr">
+        <item>@drawable/number_one</item>
+        <item>@drawable/number_two</item>
+    </integer-array>
+
+    <string-array name="categories">
+        <item>Bicycle</item>
+        <item>Photography</item>
+    </string-array>
 </resources>
