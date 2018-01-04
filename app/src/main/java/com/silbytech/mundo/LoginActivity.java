@@ -2,6 +2,8 @@ package com.silbytech.mundo;
 
 import android.app.Activity;
 import com.silbytech.mundo.responses.LoginResponse;
+
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
@@ -52,22 +54,29 @@ public class LoginActivity extends Activity {
                     call.enqueue(new Callback<LoginResponse>() {
                         @Override
                         public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                            LoginResponse loginResponse = response.body();
-                            System.out.println("Worked");
-                            String fullName = loginResponse.getFirstName() + " " + loginResponse.getSurname();
-                            preferences = getSharedPreferences(PREFS, 0);
-                            preferences.edit().putString("userid", loginResponse.getId()).apply();
-                            preferences.edit().putString("fullName", fullName).apply();
-                            preferences.edit().putString("token", response.headers().get("x-auth")).apply();
+                            if(response.code() == 200){
+                                LoginResponse loginResponse = response.body();
+                                String fullName = loginResponse.getFirstName() + " " + loginResponse.getSurname();
+                                preferences = getSharedPreferences(PREFS, 0);
+                                preferences.edit().putString("userid", loginResponse.getId()).apply();
+                                preferences.edit().putString("fullName", fullName).apply();
+                                preferences.edit().putString("token", response.headers().get("x-auth")).apply();
+                                Toast.makeText(getApplicationContext(),
+                                        R.string.welcomeBack, Toast.LENGTH_SHORT).show();
+                                Intent i = new Intent(LoginActivity.this, MainActivity.class);
+                                startActivity(i);
+                            }
+                            else if(response.code() == 400){
+                                Toast.makeText(getApplicationContext(),
+                                        R.string.detailsError, Toast.LENGTH_SHORT).show();
+                            }
                         }
-
                         @Override
                         public void onFailure(Call<LoginResponse> call, Throwable t) {
-                            System.out.println("Failed");
-
+                            Toast.makeText(getApplicationContext(),
+                                    R.string.errorTryLater, Toast.LENGTH_SHORT).show();
                         }
                     });
-
                 }
             }
         });
