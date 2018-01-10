@@ -42,8 +42,9 @@ public class IntroductionActivity extends AppCompatActivity {
         addBottomDots(0);
         ViewPagerAdapter adapter = new ViewPagerAdapter();
         pager.setAdapter(adapter);
-        pager.addOnPageChangeListener(viewListner);
+        pager.addOnPageChangeListener(viewListener);
 
+        //Sets the Skip button
         btnSkip.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -53,6 +54,7 @@ public class IntroductionActivity extends AppCompatActivity {
             }
         });
 
+        //Sets the Next button to go onto the next screen
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -67,10 +69,10 @@ public class IntroductionActivity extends AppCompatActivity {
                 }
             }
         });
-
     }
 
 
+    //This Will add the bottom dots according to the number of intro screens
     private void addBottomDots(int position){
         TextView[] dots = new TextView[layouts.length];
         int[] colorActive = getResources().getIntArray(R.array.dot_active);
@@ -83,7 +85,6 @@ public class IntroductionActivity extends AppCompatActivity {
             dots[i].setTextColor(colorInactive[position]);
             dotsLayout.addView(dots[i]);
         }
-
         if(dots.length > 0){
             dots[position].setTextColor(colorActive[position]);
         }
@@ -94,11 +95,9 @@ public class IntroductionActivity extends AppCompatActivity {
     }
 
 
-    ViewPager.OnPageChangeListener viewListner = new ViewPager.OnPageChangeListener() {
+    ViewPager.OnPageChangeListener viewListener = new ViewPager.OnPageChangeListener() {
         @Override
-        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-
-        }
+        public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {}
 
         @Override
         public void onPageSelected(int position) {
@@ -112,6 +111,7 @@ public class IntroductionActivity extends AppCompatActivity {
                 btnSkip.setVisibility(View.VISIBLE);
             }
         }
+
 
         @Override
         public void onPageScrollStateChanged(int state) {}
@@ -148,4 +148,3 @@ public class IntroductionActivity extends AppCompatActivity {
         }
     }
 }
-
