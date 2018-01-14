@@ -3,4 +3,21 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="loyali">#b80102</color>
+    <color name="grey50">#FAFAFA</color>
+    <color name="grey500">#BDBDBD</color>
+    <color name="white">#FFF</color>
+    <color name="mundo_blue">#01AEED</color>
+
+    <array name="dot_active">
+        <item>@color/white</item>
+        <item>@color/white</item>
+        <item>@color/white</item>
+    </array>
+
+    <array name="dot_inactive">
+        <item>@color/grey500</item>
+        <item>@color/grey500</item>
+        <item>@color/grey500</item>
+    </array>
 </resources>
