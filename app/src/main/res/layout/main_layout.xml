@@ -9,12 +9,19 @@
         android:id="@+id/app_bar"
         layout="@layout/app_bar" />
 
+    <FrameLayout
+        android:id="@+id/frame_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/bottomNavigation"
+        android:layout_below="@+id/app_bar" />
+
 
     <android.support.design.widget.BottomNavigationView
+        android:id="@+id/bottomNavigation"
         android:background="@color/mundo_blue"
-        android:id="@+id/navigation"
         android:layout_width="match_parent"
-        android:layout_height="56dp"
+        android:layout_height="60dp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_gravity="start"
