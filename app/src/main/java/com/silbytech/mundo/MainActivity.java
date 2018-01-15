@@ -12,6 +12,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.silbytech.mundo.fragments.AllCategoriesFragment;
+
 public class MainActivity extends AppCompatActivity {
 
     @Override
@@ -35,7 +37,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (item.getItemId()){
                     case R.id.action_all:
                         toolbar.setTitle("All");
-                        Fragment frag = new SettingsFragment();
+                        Fragment frag = new AllCategoriesFragment();
                         loadFragment(frag);
                         return true;
                     case R.id.action_account:

@@ -37,7 +37,7 @@ public class SplashActivity extends AppCompatActivity {
             public void run() {
                 if (loggedIn) {
                     Toast.makeText(getApplicationContext(),
-                            "Welcome man!",
+                            "Welcome back!",
                             Toast.LENGTH_SHORT).show();
                     Intent i = new Intent(SplashActivity.this, MainActivity.class);
                     SplashActivity.this.startActivity(i);

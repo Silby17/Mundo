@@ -63,7 +63,7 @@ public class IntroductionActivity extends AppCompatActivity {
                     pager.setCurrentItem(current);
                 }
                 else {
-                    Intent i = new Intent(IntroductionActivity.this, LandingActivity.class);
+                    Intent i = new Intent(IntroductionActivity.this, IntroductionActivity.class);
                     startActivity(i);
                     finish();
                 }
