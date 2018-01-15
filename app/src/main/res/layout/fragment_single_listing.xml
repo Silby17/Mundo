@@ -10,47 +10,75 @@
         android:layout_height="match_parent">
 
         <RelativeLayout
-            android:background="@color/grey500"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="100dp">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="20sp"
-                android:layout_centerVertical="true"
-                android:textColor="@color/link_blue"
-                android:paddingStart="5dp"
-                android:paddingLeft="5dp"
-                android:text="@string/cancel"/>
+            <RelativeLayout
+                android:id="@+id/headerLayout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:background="@color/grey500">
 
-            <TextView
-                android:layout_centerInParent="true"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="18sp"
-                android:textColor="@android:color/black"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                android:text="@string/edit_item" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginStart="5dp"
+                    android:text="@string/cancel"
+                    android:textColor="@color/link_blue"
+                    android:textSize="20sp" />
 
-            <TextView
-                android:text="@string/done"
-                android:textSize="20sp"
-                android:layout_alignParentEnd="true"
-                android:paddingRight="5dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:textColor="@color/link_blue"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerInParent="true"
+                    android:layout_centerVertical="true"
+                    android:text="@string/edit_item"
+                    android:textColor="@android:color/black"
+                    android:textSize="18sp" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:text="@string/done"
+                    android:textColor="@color/link_blue"
+                    android:textSize="20sp" />
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_below="@+id/headerLayout"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                tools:layout_editor_absoluteX="0dp"
+                tools:layout_editor_absoluteY="50dp">
+
+                <Switch
+                    android:id="@+id/switchActive"
+                    android:layout_marginEnd="5dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentBottom="true"
+                    android:layout_alignParentEnd="true"
+                    android:layout_alignParentRight="true" />
+            </RelativeLayout>
 
 
         </RelativeLayout>
 
 
-    </android.support.constraint.ConstraintLayout>
 
+
+
+
+    </android.support.constraint.ConstraintLayout>
 
 
 </FrameLayout>
