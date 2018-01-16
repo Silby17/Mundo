@@ -4,61 +4,84 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 
+import com.silbytech.mundo.Communicator;
 import com.silbytech.mundo.R;
 import com.silbytech.mundo.adapters.AllCategoriesAdapter;
+import com.silbytech.mundo.entities.CategoriesList;
+import com.silbytech.mundo.entities.Category;
 
 import java.util.ArrayList;
+import java.util.List;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 /************************************
  * Created by Yosef Silberhaft
  ************************************/
 public class AllCategoriesFragment extends Fragment {
-    private ArrayList<String> arrList;
+    private OnFragmentInteractionListener mListener;
+    private String TAG = "AllCategoriesFragment";
     private AllCategoriesAdapter adapter;
     private ListView categoriesListView;
+    private List<Category> categoryList;
+    private ProgressBar loadingProgress;
 
-
-    private OnFragmentInteractionListener mListener;
 
     public AllCategoriesFragment() {}
 
 
     public static AllCategoriesFragment newInstance(String param1, String param2) {
         AllCategoriesFragment fragment = new AllCategoriesFragment();
-        /*Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);*/
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       /* if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }*/
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View proView = inflater.inflate(R.layout.fragment_all_categories, container, false);
+        final View proView = inflater.inflate(R.layout.fragment_all_categories, container, false);
+        //Loads the ProgressBar
+        loadingProgress = proView.findViewById(R.id.load_progress);
 
-        this.categoriesListView = proView.findViewById(R.id.categoriesListView);
-        arrList= new ArrayList<>();
-        for(int i = 0; i < 10; i++){
-            arrList.add("New title# " + i);
-        }
-        adapter = new AllCategoriesAdapter(arrList, proView.getContext());
-        categoriesListView.setAdapter(adapter);
+        //Creates the server communicator
+        Communicator communicator = new Communicator();
+        Call<CategoriesList> call = communicator.getAllCategories();
+        loadingProgress.setVisibility(View.VISIBLE);
+        //Places the call
+        call.enqueue(new Callback<CategoriesList>() {
+            @Override
+            public void onResponse(Call<CategoriesList> call, Response<CategoriesList> response) {
+                loadingProgress.setVisibility(View.GONE);
+                if(response.body().getCategoryList() != null){
+                    categoryList = new ArrayList<>(response.body().getCategoryList());
+                }
+                categoriesListView =  proView.findViewById(R.id.categoriesListView);
+                categoriesListView.setEmptyView(proView.findViewById(R.id.emptyCategoriesList));
+                adapter = new AllCategoriesAdapter(categoryList, proView.getContext());
+                categoriesListView.setAdapter(adapter);
+            }
+
+            @Override
+            public void onFailure(Call<CategoriesList> call, Throwable t) {
+                loadingProgress.setVisibility(View.GONE);
+                Toast.makeText(getContext(),
+                        R.string.errorTryLater, Toast.LENGTH_SHORT).show();
+            }
+        });
         return proView;
     }
 
@@ -75,7 +98,7 @@ public class AllCategoriesFragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            Toast.makeText(context, "All Categories Attached", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "Attached All Categories Fragment");
         }
     }
 
