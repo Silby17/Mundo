@@ -12,6 +12,19 @@
     <string name="welcomeBack">Welcome Back!</string>
     <string name="detailsError">Please check your credentials</string>
     <string name="errorTryLater">Server Error, Please try later.</string>
+    <string name="or">or</string>
+    <string name="login">Login</string>
+    <string name="cancel">Cancel</string>
+    <string name="edit_item">Edit Item</string>
+    <string name="done">Done</string>
+    <string name="title">Title</string>
+    <string name="price">Price</string>
+    <string name="all">All</string>
+    <string name="account">Account</string>
+    <string name="settings">Settings</string>
+    <string name="inbox">Inbox</string>
+    <string name="active">Active</string>
+    <string name="not_active">Not Active</string>
 
 
     <integer-array name="img_id_arr">
@@ -23,4 +36,7 @@
         <item>Bicycle</item>
         <item>Photography</item>
     </string-array>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>
