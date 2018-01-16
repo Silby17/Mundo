@@ -4,6 +4,7 @@ import android.os.Message;
 
 import com.google.gson.Gson;
 import com.silbytech.mundo.communication.Interface;
+import com.silbytech.mundo.entities.CategoriesList;
 import com.silbytech.mundo.entities.ListingsArray;
 import com.silbytech.mundo.responses.LoginResponse;
 import com.silbytech.mundo.responses.MessageResponse;
@@ -59,5 +60,18 @@ public class Communicator {
         Retrofit retrofit = builder.build();
         Interface comInterface = retrofit.create(Interface.class);
         return comInterface.getAllListings();
+    }
+
+    /**********************************************************************************
+     * This Call will get all the categories from the server and return the call
+     * @return the call to me made
+     **********************************************************************************/
+    public Call<CategoriesList> getAllCategories() {
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl(HURL)
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit = builder.build();
+        Interface comInterface = retrofit.create(Interface.class);
+        return comInterface.getAllCategories();
     }
 }
