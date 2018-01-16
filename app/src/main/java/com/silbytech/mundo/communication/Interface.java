@@ -1,5 +1,6 @@
 package com.silbytech.mundo.communication;
 
+import com.silbytech.mundo.entities.CategoriesList;
 import com.silbytech.mundo.entities.ListingsArray;
 import com.silbytech.mundo.responses.LoginResponse;
 import com.silbytech.mundo.responses.MessageResponse;
@@ -64,4 +65,7 @@ public interface Interface {
     @POST("/upload")
     Call<Response> uploadImage(@Part("description") RequestBody description,
                                @Part MultipartBody.Part image);
+
+    @GET("/categories")
+    Call<CategoriesList> getAllCategories();
 }
