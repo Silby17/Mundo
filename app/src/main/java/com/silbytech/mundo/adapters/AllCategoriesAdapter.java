@@ -6,11 +6,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.TextView;
 import com.silbytech.mundo.R;
+import com.silbytech.mundo.entities.Category;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /************************************
  * Created by Yosef Silberhaft
@@ -20,11 +21,11 @@ public class AllCategoriesAdapter extends BaseAdapter {
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.Adapter mAdapter;
-    private ArrayList<String> list;
+    private List<Category> list;
     private String URL = "https://images.pexels.com/photos/2242/wall-sport-green-bike.jpg?w=1260&h=750&auto=compress&cs=tinysrgb";
     private Context context;
 
-    public AllCategoriesAdapter(ArrayList<String> list, Context context) {
+    public AllCategoriesAdapter(List<Category> list, Context context) {
         this.list = list;
         this.context = context;
     }
@@ -48,7 +49,7 @@ public class AllCategoriesAdapter extends BaseAdapter {
     public View getView(int i, View view, ViewGroup viewGroup) {
         View v = View.inflate(context, R.layout.single_category_fragment, null);
         TextView title = v.findViewById(R.id.categoryTitle);
-        title.setText(list.get(i));
+        title.setText(list.get(i).getName());
 
         recList = new ArrayList<>();
         for(int j = 0; j < 10; j++){
