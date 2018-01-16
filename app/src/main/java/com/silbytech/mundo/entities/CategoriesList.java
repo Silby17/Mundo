@@ -1,9 +1,8 @@
 package com.silbytech.mundo.entities;
 
 import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
-import java.util.List;
+import java.util.ArrayList;
 
 /************************************
  * Created by Yosef Silberhaft
@@ -11,17 +10,17 @@ import java.util.List;
 public class CategoriesList implements Serializable {
 
     @SerializedName("categories")
-    private List<Category> categoryList;
+    private ArrayList<Category> categoryList;
 
-    public CategoriesList(List<Category> categoryList) {
+    public CategoriesList(ArrayList<Category> categoryList) {
         this.categoryList = categoryList;
     }
 
-    public List<Category> getCategoryList() {
+    public ArrayList<Category> getCategoryList() {
         return categoryList;
     }
 
-    public void setCategoryList(List<Category> categoryList) {
+    public void setCategoryList(ArrayList<Category> categoryList) {
         this.categoryList = categoryList;
     }
 }
