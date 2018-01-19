@@ -13,7 +13,7 @@ public class CategorySectionListings implements Serializable {
     @SerializedName("category_name")
     private String categoryName;
 
-    @SerializedName("listing")
+    @SerializedName("listings")
     private ArrayList<ListingModel> listingModels;
 
     public CategorySectionListings(String categoryName, ArrayList<ListingModel> listingModels) {
