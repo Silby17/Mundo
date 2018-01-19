@@ -19,15 +19,13 @@ import com.silbytech.mundo.fragments.SettingsFragment;
 
 public class MyAccountFragment extends Fragment {
     private String TAG = "MyAccountFragment";
-    private ViewPager viewPager;
-    private TabLayout tabLayout;
 
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private static final String USER_ID = "userId";
+    private static final String USER_TOKEN = "token";
 
     // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    private String userId;
+    private String userToken;
 
     private OnFragmentInteractionListener mListener;
 
@@ -35,20 +33,12 @@ public class MyAccountFragment extends Fragment {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment MyAccountFragment.
-     */
-    // TODO: Rename and change types and number of parameters
+
     public static MyAccountFragment newInstance(String param1, String param2) {
         MyAccountFragment fragment = new MyAccountFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(USER_ID, param1);
+        args.putString(USER_TOKEN, param2);
         fragment.setArguments(args);
         return fragment;
     }
@@ -58,27 +48,24 @@ public class MyAccountFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            userId = getArguments().getString(USER_ID);
+            userToken = getArguments().getString(USER_TOKEN);
         }
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_my_account, container, false);
-        viewPager = view.findViewById(R.id.vpAccount);
-        viewPager.bringToFront();
-        tabLayout = view.findViewById(R.id.accountTabs);
+        ViewPager viewPager = view.findViewById(R.id.vpAccount);
+        TabLayout tabLayout = view.findViewById(R.id.accountTabs);
         setupViewPager(viewPager);
         tabLayout.setupWithViewPager(viewPager);
-
         return view;
     }
 
-    // TODO: Rename method, update argument and hook method into UI event
+
     public void onButtonPressed(Uri uri) {
         if (mListener != null) {
             mListener.onFragmentInteraction(uri);
@@ -102,15 +89,14 @@ public class MyAccountFragment extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
-        // TODO: Update argument type and name
         void onFragmentInteraction(Uri uri);
     }
 
     private void setupViewPager(ViewPager viewPager){
         ViewPagerAdapter adapter = new ViewPagerAdapter(this.getFragmentManager());
 
-        adapter.addFragment(SettingsFragment.newInstance(), "Settings");
-        adapter.addFragment(SettingsFragment.newInstance(), "Settings 2");
+        adapter.addFragment(SettingsFragment.newInstance(), "My Listings");
+        adapter.addFragment(SettingsFragment.newInstance(), "My Rentals");
         viewPager.setAdapter(adapter);
 
         viewPager.setCurrentItem(0);
