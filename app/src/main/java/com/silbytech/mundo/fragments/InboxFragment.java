@@ -1,4 +1,4 @@
-package com.silbytech.mundo;
+package com.silbytech.mundo.fragments;
 
 import android.content.Context;
 import android.net.Uri;
@@ -8,6 +8,8 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.silbytech.mundo.R;
 
 public class InboxFragment extends Fragment {
     private String TAG = "InboxFragment";
