@@ -4,10 +4,12 @@
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
     <color name="loyali">#b80102</color>
-    <color name="grey50">#FAFAFA</color>
     <color name="grey500">#BDBDBD</color>
     <color name="white">#FFF</color>
     <color name="mundo_blue">#01AEED</color>
+    <color name="link_blue">#0645AD</color>
+    <color name="gainsboroGray">#DCDCDC</color>
+    <color name="black">#000</color>
 
     <array name="dot_active">
         <item>@color/white</item>
