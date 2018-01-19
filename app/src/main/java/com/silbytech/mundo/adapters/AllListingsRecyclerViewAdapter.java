@@ -1,4 +1,4 @@
-package com.silbytech.mundo;
+package com.silbytech.mundo.adapters;
 
 import android.content.Context;
 import android.support.v7.widget.LinearLayoutManager;
@@ -7,9 +7,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import com.silbytech.mundo.CategoryListDataAdapter;
+import com.silbytech.mundo.R;
 import com.silbytech.mundo.entities.CategorySectionListings;
 import com.silbytech.mundo.entities.ListingModel;
-
 import java.util.ArrayList;
 
 /************************************
