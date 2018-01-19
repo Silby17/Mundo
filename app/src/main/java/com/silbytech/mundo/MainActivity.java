@@ -3,6 +3,10 @@ package com.silbytech.mundo;
 import com.silbytech.mundo.fragments.AllCategoriesFragment;
 import com.silbytech.mundo.fragments.InboxFragment;
 import com.silbytech.mundo.fragments.SettingsFragment;
+
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
@@ -60,15 +64,17 @@ public class MainActivity extends AppCompatActivity {
             public boolean onNavigationItemSelected(MenuItem item) {
                 switch (item.getItemId()){
                     case R.id.action_all:
+                        toolbar.setTitle("All Listings");
                         Fragment frag = new AllCategoriesFragment();
                         frag.setArguments(userArgs);
                         loadFragment(frag);
                         return true;
                     case R.id.action_account:
                         toolbar.setTitle("Account");
-                        Fragment accountFrag = new SingleListingFragment();
-                        accountFrag.setArguments(userArgs);
-                        loadFragment(accountFrag);
+                        Fragment myAccountFrag = new MyAccountFragment();
+                        /*Fragment accountFrag = new SingleListingFragment();*/
+                        myAccountFrag.setArguments(userArgs);
+                        loadFragment(myAccountFrag);
                         return true;
                     case R.id.action_inbox:
                         toolbar.setTitle("Inbox");
@@ -110,4 +116,39 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         this.finish();
     }
-}
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch(item.getItemId()){
+            case R.id.itemLogout:
+                AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(getApplicationContext());
+                alertDialogBuilder.setTitle("Logout");
+
+                // Set Dialog Message
+                alertDialogBuilder
+                        .setMessage("Are you sure you want to Logout?")
+                        .setCancelable(false)
+                        .setPositiveButton("Yes",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                MyApplication.getInstance().clearApplicationData();
+                                SharedPreferences prefs = getSharedPreferences(PREFS, 0);
+                                prefs.edit().clear().apply();
+                                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                                finish();
+                            }
+                        })
+                        .setNegativeButton("No",new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,int id) {
+                                // if this button is clicked, just close
+                                // the dialog box and do nothing
+                                dialog.cancel();
+                            }
+                        });
+                // Create Alert Dialog
+                AlertDialog alertDialog = alertDialogBuilder.create();
+
+                // Show the Dialog Box
+                alertDialog.show();
+        }
+        return super.onOptionsItemSelected(item);
+    }}
