@@ -1,7 +1,8 @@
 package com.silbytech.mundo.communication;
 
 import com.silbytech.mundo.entities.CategoriesList;
-import com.silbytech.mundo.entities.ListingsArray;
+import com.silbytech.mundo.entities.CategorySectionListingsList;
+import com.silbytech.mundo.entities.ListingsList;
 import com.silbytech.mundo.responses.LoginResponse;
 import com.silbytech.mundo.responses.MessageResponse;
 import com.silbytech.mundo.responses.Response;
@@ -19,6 +20,7 @@ import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
 import retrofit2.http.PartMap;
+import retrofit2.http.Path;
 
 /************************************
  * Created by Yosef Silberhaft
@@ -49,9 +51,6 @@ public interface Interface {
             @PartMap Map<String, RequestBody> map
     );
 
-    @GET("/all/listings/")
-    Call<ListingsArray> getAllListings();
-
     @GET("/testing")
     Call<Response> getTesting();
 
@@ -68,4 +67,12 @@ public interface Interface {
 
     @GET("/categories")
     Call<CategoriesList> getAllCategories();
+
+
+    @GET("/listings/{category}/category")
+    Call<ListingsList> getListingsByCategory(@Path("category") String categoryName);
+
+
+    @GET("/categories/listings")
+    Call<CategorySectionListingsList> getListingsByCategory();
 }
