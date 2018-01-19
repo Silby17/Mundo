@@ -1,33 +1,28 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.design.widget.CoordinatorLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/accountAppBar"
-        android:background="@android:color/transparent"
-        android:layout_width="match_parent"
-        android:elevation="0dp"
-        android:layout_height="wrap_content">
-
-        <android.support.design.widget.TabLayout
-            android:id="@+id/accountTabs"
-            app:tabTextAppearance="@style/CustomTabText"
-            app:tabTextColor="@color/black"
-            android:layout_gravity="center"
-            app:tabSelectedTextColor="@android:color/white"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:tabIndicatorColor="@android:color/white"
-            app:tabMode="fixed"
-            app:tabGravity="fill"/>
-    </android.support.design.widget.AppBarLayout>
+    <android.support.design.widget.TabLayout
+        android:layout_centerHorizontal="true"
+        app:tabBackground="@drawable/tab_color_selector"
+        android:layout_marginTop="10dp"
+        android:id="@+id/accountTabs"
+        app:tabTextAppearance="@style/CustomTabText"
+        app:tabTextColor="@color/black"
+        android:layout_width="250dp"
+        android:layout_height="wrap_content"
+        app:tabIndicatorColor="@android:color/white"
+        app:tabMode="fixed"
+        app:tabGravity="center"/>
 
     <android.support.v4.view.ViewPager
+        android:layout_below="@+id/accountTabs"
         android:id="@+id/vpAccount"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         app:layout_behavior="@string/appbar_scrolling_view_behavior"/>
-</android.support.design.widget.CoordinatorLayout>
+</RelativeLayout>
+
