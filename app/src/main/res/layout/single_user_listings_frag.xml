@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_marginTop="2dp"
+    android:layout_width="match_parent"
+    android:layout_height="120dp">
+
+    <ImageView
+        android:id="@+id/listingImg"
+        android:layout_width="110dp"
+        android:layout_height="110dp" />
+
+    <RelativeLayout
+        android:layout_marginLeft="2dp"
+        android:layout_marginStart="2dp"
+        android:id="@+id/listingInfoFrag"
+        android:layout_toRightOf="@+id/listingImg"
+        android:layout_toEndOf="@+id/listingImg"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/tvTitle"
+            android:textSize="20sp"
+            android:textColor="@color/black"
+            android:text="Title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvListingLocation"
+            android:layout_below="@+id/tvTitle"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:text="Tel Aviv ISrael"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/tvListingPrice"
+            android:textColor="@color/black"
+            android:textSize="16sp"
+            android:text="₪17.90"
+            android:layout_below="@id/tvListingLocation"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <Switch
+            android:layout_alignParentRight="true"
+            android:id="@+id/swListingActive"
+            android:layout_width="wrap_content"
+            android:text="Active"
+            android:layout_height="wrap_content" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
