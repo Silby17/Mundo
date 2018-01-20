@@ -45,7 +45,7 @@ public class UserListingsAdapter extends BaseAdapter {
         View v = View.inflate(context, R.layout.single_user_listings_frag, null);
 
         ImageView listingImg = v.findViewById(R.id.listingImg);
-        TextView listingTitle = v.findViewById(R.id.tvListingTitle);
+        TextView listingTitle = v.findViewById(R.id.tvTitle);
         TextView listingLocation = v.findViewById(R.id.tvListingLocation);
         TextView listingPrice = v.findViewById(R.id.tvListingPrice);
 
@@ -61,6 +61,13 @@ public class UserListingsAdapter extends BaseAdapter {
         listingPrice.setText(price);
 
         active.setChecked(userListings.get(i).isActive());
+
+        if(userListings.get(i).isActive()){
+            active.setText(R.string.active);
+        }
+        else {
+            active.setText(R.string.not_active);
+        }
         return v;
     }
 }
