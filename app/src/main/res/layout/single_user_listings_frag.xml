@@ -11,8 +11,8 @@
         android:layout_height="110dp" />
 
     <RelativeLayout
-        android:layout_marginLeft="2dp"
-        android:layout_marginStart="2dp"
+        android:layout_marginLeft="4dp"
+        android:layout_marginStart="4dp"
         android:id="@+id/listingInfoFrag"
         android:layout_toRightOf="@+id/listingImg"
         android:layout_toEndOf="@+id/listingImg"
@@ -21,9 +21,8 @@
 
         <TextView
             android:id="@+id/tvTitle"
-            android:textSize="20sp"
+            android:textSize="16sp"
             android:textColor="@color/black"
-            android:text="Title"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
@@ -31,16 +30,16 @@
             android:id="@+id/tvListingLocation"
             android:layout_below="@+id/tvTitle"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:text="Tel Aviv ISrael"
+            android:textSize="14sp"
+            android:layout_marginTop="2dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
 
         <TextView
             android:id="@+id/tvListingPrice"
             android:textColor="@color/black"
-            android:textSize="16sp"
-            android:text="₪17.90"
+            android:textSize="14sp"
+            android:layout_marginTop="2dp"
             android:layout_below="@id/tvListingLocation"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -49,9 +48,7 @@
             android:layout_alignParentRight="true"
             android:id="@+id/swListingActive"
             android:layout_width="wrap_content"
-            android:text="Active"
             android:layout_height="wrap_content" />
-
 
     </RelativeLayout>
 
