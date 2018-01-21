@@ -85,4 +85,15 @@ public class Communicator {
         Interface comInterface = retrofit.create(Interface.class);
         return comInterface.getListingsByCategory();
     }
+
+
+    public Call<ListingsList> getUsersListings(String userToken){
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl(HURL)
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit = builder.build();
+        Interface comInterface = retrofit.create(Interface.class);
+
+        return comInterface.getUsersListings(userToken);
+    }
 }
