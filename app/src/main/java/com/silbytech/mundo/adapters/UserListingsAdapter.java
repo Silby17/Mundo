@@ -62,12 +62,6 @@ public class UserListingsAdapter extends BaseAdapter {
 
         active.setChecked(userListings.get(i).isActive());
 
-        if(userListings.get(i).isActive()){
-            active.setText(R.string.active);
-        }
-        else {
-            active.setText(R.string.not_active);
-        }
         return v;
     }
 }
