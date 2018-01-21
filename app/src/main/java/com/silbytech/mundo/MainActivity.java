@@ -3,7 +3,6 @@ package com.silbytech.mundo;
 import com.silbytech.mundo.fragments.AllCategoriesFragment;
 import com.silbytech.mundo.fragments.InboxFragment;
 import com.silbytech.mundo.fragments.SettingsFragment;
-
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -24,7 +23,7 @@ import android.view.MenuItem;
  * Created by Yosef Silberhaft
  ************************************/
 public class MainActivity extends AppCompatActivity {
-    private FragmentManager fragmentManager;
+
     private String userID;
     public static final String PREFS = "prefs";
     public String userToken;
@@ -37,7 +36,6 @@ public class MainActivity extends AppCompatActivity {
         final Toolbar toolbar = findViewById(R.id.app_bar);
         setSupportActionBar(toolbar);
         toolbar.setTitleTextColor(getResources().getColor(R.color.white));
-        fragmentManager = getSupportFragmentManager();
 
         //FragmentTransaction transaction = fragmentManager.beginTransaction();
         preferences = getSharedPreferences(PREFS, 0);
@@ -50,9 +48,9 @@ public class MainActivity extends AppCompatActivity {
         userArgs.putString("token", userToken);
 
 
-        /*//Starts the All Categories Fragment at start
+        //Starts the All Categories Fragment at start
         Fragment frag = new AllCategoriesFragment();
-        loadFragment(frag);*/
+        loadFragment(frag);
 
         BottomNavigationView bottomNavigationView = findViewById(R.id.bottomNavigation);
         BottomNavigationViewHelper.removeShiftMode(bottomNavigationView);
@@ -72,7 +70,6 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.action_account:
                         toolbar.setTitle("Account");
                         Fragment myAccountFrag = new MyAccountFragment();
-                        /*Fragment accountFrag = new SingleListingFragment();*/
                         myAccountFrag.setArguments(userArgs);
                         loadFragment(myAccountFrag);
                         return true;
@@ -102,6 +99,10 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+    /**************************************************************************
+     * This function will load a fragment into the Frame container
+     * @param fragment - fragment to be loaded
+     **************************************************************************/
     private void loadFragment(Fragment fragment) {
         FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
         transaction.replace(R.id.frame_container, fragment);
@@ -109,9 +110,9 @@ public class MainActivity extends AppCompatActivity {
         transaction.commit();
     }
 
-    /**************************************************
+    /*************************************************************************
      * Closes the app on Back Button Pressed
-     *************************************************/
+     *************************************************************************/
     @Override
     public void onBackPressed() {
         this.finish();
@@ -151,4 +152,5 @@ public class MainActivity extends AppCompatActivity {
                 alertDialog.show();
         }
         return super.onOptionsItemSelected(item);
-    }}
+    }
+}
