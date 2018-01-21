@@ -22,23 +22,19 @@ public class MyAccountFragment extends Fragment {
 
     private static final String USER_ID = "userId";
     private static final String USER_TOKEN = "token";
-
-    // TODO: Rename and change types of parameters
     private String userId;
     private String userToken;
 
     private OnFragmentInteractionListener mListener;
 
-    public MyAccountFragment() {
-        // Required empty public constructor
-    }
+    public MyAccountFragment() {}
 
 
-    public static MyAccountFragment newInstance(String param1, String param2) {
+    public static MyAccountFragment newInstance(String userId, String userToken) {
         MyAccountFragment fragment = new MyAccountFragment();
         Bundle args = new Bundle();
-        args.putString(USER_ID, param1);
-        args.putString(USER_TOKEN, param2);
+        args.putString(USER_ID, userId);
+        args.putString(USER_TOKEN, userToken);
         fragment.setArguments(args);
         return fragment;
     }
@@ -95,7 +91,8 @@ public class MyAccountFragment extends Fragment {
     private void setupViewPager(ViewPager viewPager){
         ViewPagerAdapter adapter = new ViewPagerAdapter(this.getFragmentManager());
 
-        adapter.addFragment(SettingsFragment.newInstance(), "My Listings");
+        String tok = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI1YTMyODFjNDU3ZjhjZTI1MWM3NGE4YzgiLCJhY2Nlc3MiOiJhdXRoIiwiaWF0IjoxNTE2NDY1NjI4fQ.kHitKHjAwSZCPVI2HRlkHPD8Djs-PdPCc59PcqMQ8_c";
+        adapter.addFragment(UserListingFragment.newInstance(userId, tok), "My Listings");
         adapter.addFragment(SettingsFragment.newInstance(), "My Rentals");
         viewPager.setAdapter(adapter);
 
