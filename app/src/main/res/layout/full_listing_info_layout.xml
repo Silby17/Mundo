@@ -21,13 +21,14 @@
                 android:background="@color/grey500">
 
                 <TextView
+                    android:id="@+id/tvBack"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerVertical="true"
                     android:layout_marginLeft="5dp"
                     android:clickable="true"
                     android:layout_marginStart="5dp"
-                    android:text="@string/cancel"
+                    android:text="@string/back"
                     android:textColor="@color/link_blue"
                     android:textSize="20sp" />
 
@@ -37,22 +38,10 @@
                     android:layout_centerHorizontal="true"
                     android:layout_centerInParent="true"
                     android:layout_centerVertical="true"
-                    android:text="@string/edit_item"
+                    android:text="@string/listing"
                     android:textColor="@android:color/black"
                     android:textSize="18sp" />
 
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentEnd="true"
-                    android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
-                    android:layout_marginEnd="5dp"
-                    android:clickable="true"
-                    android:layout_marginRight="5dp"
-                    android:text="@string/done"
-                    android:textColor="@color/link_blue"
-                    android:textSize="20sp" />
             </RelativeLayout>
 
             <RelativeLayout
@@ -65,7 +54,6 @@
                 <TextView
                     android:id="@+id/tvListingTitle"
                     android:textSize="20sp"
-                    android:text="This is the title"
                     android:textColor="@color/black"
                     android:layout_centerHorizontal="true"
                     android:layout_width="wrap_content"
@@ -91,49 +79,93 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
+
             <RelativeLayout
                 android:id="@+id/upperFrag"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content">
 
-                <ImageView
-                    android:id="@+id/listingImg"
-                    android:layout_width="match_parent"
-                    android:layout_height="130dp" />
-
-                <TextView
-                    android:id="@+id/tvDescriptionHeader"
+                <android.support.v7.widget.CardView
+                    android:id="@+id/imgCard"
                     android:layout_marginTop="3dp"
-                    android:layout_below="@+id/listingImg"
-                    android:text="@string/description"
-                    android:textSize="16sp"
-                    android:textColor="@color/black"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content" />
-
-                <TextView
-                    android:layout_below="@+id/tvDescriptionHeader"
-                    android:scrollbars="vertical"
-                    android:maxLines="4"
-                    android:id="@+id/tvDescription"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginEnd="3dp"
                     android:layout_width="match_parent"
-                    android:layout_height="80dp" />
+                    android:layout_height="130dp">
+                    <ImageView
+                        android:id="@+id/listingImg"
+                        android:layout_marginTop="5dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="130dp" />
+                </android.support.v7.widget.CardView>
+                
+                <android.support.v7.widget.CardView
+                    android:layout_below="@+id/imgCard"
+                    android:layout_width="match_parent"
+                    android:layout_marginTop="3dp"
+                    android:layout_marginLeft="3dp"
+                    android:layout_marginStart="3dp"
+                    android:layout_marginRight="3dp"
+                    android:layout_marginEnd="3dp"
+                    android:layout_marginBottom="3dp"
+                    android:layout_height="wrap_content">
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent">
+
+                        <TextView
+                            android:id="@+id/tvDescriptionHeader"
+                            android:layout_marginTop="3dp"
+                            android:text="@string/description"
+                            android:textSize="18sp"
+                            android:textColor="@color/black"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content" />
+                        <TextView
+                            android:id="@+id/tvDescription"
+                            android:layout_below="@+id/tvDescriptionHeader"
+                            android:layout_width="match_parent"
+                            android:layout_height="70dp" />
+                    </RelativeLayout>
+
+
+                </android.support.v7.widget.CardView>
+
+
             </RelativeLayout>
 
             <!-- The layout that will have Prices -->
             <include
                 android:id="@+id/priceSec"
+                android:layout_marginTop="4dp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@+id/upperFrag"
                 layout="@layout/price_boxes_fragment"/>
 
-
-            <include android:id="@+id/mapInclude"
-                android:layout_width="wrap_content"
+            <android.support.v7.widget.CardView
+                android:layout_below="@+id/priceSec"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/priceSec"
-                layout="@layout/map_frag"/>
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="3dp"
+                android:layout_marginStart="3dp"
+                android:layout_marginRight="3dp"
+                android:layout_marginEnd="3dp"
+                android:layout_marginBottom="3dp">
+
+                <include android:id="@+id/mapInclude"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/priceSec"
+                    layout="@layout/map_frag"/>
+
+            </android.support.v7.widget.CardView>
+
+
 
         </RelativeLayout>
     </ScrollView>
