@@ -1,17 +1,13 @@
 package com.silbytech.mundo;
 
-import android.os.Message;
-
-import com.google.gson.Gson;
 import com.silbytech.mundo.communication.Interface;
 import com.silbytech.mundo.entities.CategoriesList;
 import com.silbytech.mundo.entities.CategorySectionListingsList;
 import com.silbytech.mundo.entities.ListingsList;
 import com.silbytech.mundo.responses.LoginResponse;
 import com.silbytech.mundo.responses.MessageResponse;
-
+import com.silbytech.mundo.responses.SingleListingServerResponse;
 import java.util.Map;
-
 import okhttp3.RequestBody;
 import retrofit2.Call;
 import retrofit2.Retrofit;
@@ -76,6 +72,17 @@ public class Communicator {
         Interface comInterface = retrofit.create(Interface.class);
         return comInterface.getListingsByCategory(categoryName);
     }
+
+
+    public Call<SingleListingServerResponse> getListingByID(String itemId) {
+        Retrofit.Builder builder = new Retrofit.Builder()
+                .baseUrl(HURL)
+                .addConverterFactory(GsonConverterFactory.create());
+        Retrofit retrofit = builder.build();
+        Interface comInterface = retrofit.create(Interface.class);
+        return comInterface.getListingByID(itemId);
+    }
+
 
     public Call<CategorySectionListingsList> getListingsByCategory(){
         Retrofit.Builder builder = new Retrofit.Builder()
