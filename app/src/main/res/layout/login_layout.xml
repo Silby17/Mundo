@@ -6,7 +6,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-
     <ImageView
         android:id="@+id/mundoImg"
         android:layout_centerHorizontal="true"
@@ -29,7 +28,6 @@
             android:layout_width="287dp"
             android:layout_height="wrap_content"
             android:layout_below="@+id/edtEmail"
-
             android:layout_centerHorizontal="true"
             android:ems="10"
             android:hint="@string/password"
@@ -47,13 +45,12 @@
             android:ems="10"
             android:hint="@string/email"
             android:inputType="textEmailAddress" />
-
-
     </RelativeLayout>
 
 
     <RelativeLayout
         android:id="@+id/buttonsFrag"
+        android:layout_marginTop="20dp"
         android:layout_below="@+id/inputFrag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -62,10 +59,7 @@
             android:id="@+id/btnLogin"
             android:layout_width="287dp"
             android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="8dp"
             android:text="@string/login"/>
 
         <TextView
@@ -75,12 +69,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:text="@string/or" />
-
-
 
         <com.facebook.login.widget.LoginButton
             android:layout_below="@+id/tvOr"
@@ -88,14 +78,9 @@
             android:layout_width="287dp"
             android:layout_height="100dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginBottom="152dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
             android:paddingBottom="10dp"
             android:paddingTop="10dp" />
 
-
     </RelativeLayout>
-
 
 </RelativeLayout>
