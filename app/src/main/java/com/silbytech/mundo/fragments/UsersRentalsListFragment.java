@@ -4,6 +4,7 @@ import android.content.Context;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import com.silbytech.mundo.R;
 
 public class UsersRentalsListFragment extends Fragment {
+    private String TAG = "UsersRentalsListFragment";
     private static final String USER_ID = "userId";
     private static final String USER_TOKEN = "userToken";
     private String userId;
@@ -57,8 +59,7 @@ public class UsersRentalsListFragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            throw new RuntimeException(context.toString()
-                    + " must implement OnFragmentInteractionListener");
+            Log.d(TAG, "Loaded Fragment");
         }
     }
 
