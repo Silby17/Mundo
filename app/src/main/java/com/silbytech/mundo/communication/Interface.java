@@ -6,9 +6,8 @@ import com.silbytech.mundo.entities.ListingsList;
 import com.silbytech.mundo.responses.LoginResponse;
 import com.silbytech.mundo.responses.MessageResponse;
 import com.silbytech.mundo.responses.Response;
-
+import com.silbytech.mundo.responses.SingleListingServerResponse;
 import java.util.Map;
-
 import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import okhttp3.ResponseBody;
@@ -17,7 +16,6 @@ import retrofit2.http.Field;
 import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.GET;
 import retrofit2.http.Header;
-import retrofit2.http.Headers;
 import retrofit2.http.Multipart;
 import retrofit2.http.POST;
 import retrofit2.http.Part;
@@ -73,6 +71,10 @@ public interface Interface {
 
     @GET("/listings/{category}/category")
     Call<ListingsList> getListingsByCategory(@Path("category") String categoryName);
+
+    @GET("/listings/{id}")
+    Call<SingleListingServerResponse> getListingByID(@Path("id") String itemId
+                                      /*,@Header("x-auth") String userToken*/);
 
 
     @GET("/categories/listings")
