@@ -62,14 +62,17 @@ public class AllCategoriesFragment extends Fragment {
                 loadingProgress.setVisibility(View.GONE);
                 if(response.body().getFullListings().size() > 0){
                     categorySectionListings = response.body().getFullListings();
+
                     //Init the Main (Vertical) RecyclerView
-                    RecyclerView my_recycler_view = proView.findViewById(R.id.my_recycler_view);
-                    my_recycler_view.setHasFixedSize(true);
+                    RecyclerView mainRecyclerView = proView.findViewById(R.id.my_recycler_view);
+                    mainRecyclerView.setHasFixedSize(true);
+
                     //Init new Adapter
                     AllListingsRecyclerViewAdapter adapter = new AllListingsRecyclerViewAdapter(categorySectionListings, getContext());
-                    my_recycler_view.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+                    mainRecyclerView.setLayoutManager(new LinearLayoutManager(getContext(), LinearLayoutManager.VERTICAL, false));
+
                     //Sets the Layout adapter
-                    my_recycler_view.setAdapter(adapter);
+                    mainRecyclerView.setAdapter(adapter);
                     emptyText.setVisibility(View.GONE);
                 }
                 else {
@@ -79,6 +82,8 @@ public class AllCategoriesFragment extends Fragment {
             @Override
             public void onFailure(Call<CategorySectionListingsList> call, Throwable t) {
                 Toast.makeText(getContext(), R.string.errorTryLater, Toast.LENGTH_SHORT).show();
+                emptyText.setText(R.string.nothingToShow);
+                loadingProgress.setVisibility(View.GONE);
             }
         });
         return proView;
