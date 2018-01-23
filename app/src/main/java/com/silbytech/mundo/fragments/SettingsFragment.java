@@ -5,10 +5,10 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Toast;
 import com.silbytech.mundo.R;
 import java.util.ArrayList;
 
@@ -16,6 +16,7 @@ import java.util.ArrayList;
  * Created by Yosef Silberhaft
  ************************************/
 public class SettingsFragment extends Fragment {
+    private String TAG = "SettingsFragment";
     private RecyclerView mRecyclerView;
     private RecyclerView.LayoutManager mLayoutManager;
     private RecyclerView.Adapter mAdapter;
@@ -76,7 +77,7 @@ public class SettingsFragment extends Fragment {
         if (context instanceof OnFragmentInteractionListener) {
             mListener = (OnFragmentInteractionListener) context;
         } else {
-            Toast.makeText(context, "Notification Fragment Attached", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "Loaded Fragment");
         }
     }
 
