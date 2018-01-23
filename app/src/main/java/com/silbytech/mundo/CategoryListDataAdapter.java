@@ -1,6 +1,7 @@
 package com.silbytech.mundo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
@@ -12,15 +13,13 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.silbytech.mundo.entities.ListingModel;
 import com.squareup.picasso.Picasso;
-
 import java.util.ArrayList;
-import java.util.Locale;
 
 /************************************
  * Created by Yosef Silberhaft
  ************************************/
 public class CategoryListDataAdapter extends RecyclerView.Adapter<CategoryListDataAdapter.SingleItemRowHolder> {
-
+    private String itemId;
     private ArrayList<ListingModel> listingsList;
     private Context context;
 
@@ -47,6 +46,8 @@ public class CategoryListDataAdapter extends RecyclerView.Adapter<CategoryListDa
 
         Picasso.with(context).load(singleListing.getImageUrls().get(0))
                 .into(holder.listingImg);
+
+        itemId = listingsList.get(position).getId();
     }
 
     @Override
@@ -72,14 +73,12 @@ public class CategoryListDataAdapter extends RecyclerView.Adapter<CategoryListDa
             view.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    Toast.makeText(v.getContext(), tvTitle.getText(), Toast.LENGTH_SHORT).show();
-
-
+                    Intent i = new Intent(v.getContext(), SingleListingActivity.class);
+                    i.putExtra("itemId", itemId);
+                    Toast.makeText(v.getContext(), "Touched " + itemId, Toast.LENGTH_SHORT).show();
+                    v.getContext().startActivity(i);
                 }
             });
-
-
         }
-
     }
 }
