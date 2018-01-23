@@ -30,8 +30,8 @@ public class ListingModel implements Serializable {
     @SerializedName("weeklyPrice")
     private double weeklyPrice;
 
-    @SerializedName("monthlyPrice")
-    private double monthlyPrice;
+    @SerializedName("hourlyPrice")
+    private double hourlyPrice;
 
     @SerializedName("imageUrl")
     private ArrayList<String> imageUrls;
@@ -44,7 +44,7 @@ public class ListingModel implements Serializable {
 
     public ListingModel(String id, String creatorID, String title, String category,
                         String description, double dailyPrice, double weeklyPrice,
-                        double monthlyPrice, ArrayList<String> imageUrls,
+                        double hourlyPrice, ArrayList<String> imageUrls,
                         String location, boolean active) {
         this.id = id;
         this.creatorID = creatorID;
@@ -53,7 +53,7 @@ public class ListingModel implements Serializable {
         this.description = description;
         this.dailyPrice = dailyPrice;
         this.weeklyPrice = weeklyPrice;
-        this.monthlyPrice = monthlyPrice;
+        this.hourlyPrice = hourlyPrice;
         this.imageUrls = imageUrls;
         this.location = location;
         this.active = active;
@@ -115,12 +115,12 @@ public class ListingModel implements Serializable {
         this.weeklyPrice = weeklyPrice;
     }
 
-    public double getMonthlyPrice() {
-        return monthlyPrice;
+    public double getHourlyPrice() {
+        return hourlyPrice;
     }
 
-    public void setMonthlyPrice(double monthlyPrice) {
-        this.monthlyPrice = monthlyPrice;
+    public void setHourlyPrice(double hourlyPrice) {
+        this.hourlyPrice = hourlyPrice;
     }
 
     public ArrayList<String> getImageUrls() {
