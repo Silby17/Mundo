@@ -8,7 +8,7 @@
         android:id="@+id/pricesSection"
         android:layout_below="@+id/upperFrag"
         android:layout_width="match_parent"
-        android:layout_height="90dp">
+        android:layout_height="50dp">
 
         <LinearLayout
             android:orientation="horizontal"
@@ -32,7 +32,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/priceHour"
+                        android:id="@+id/tvPriceHour"
                         android:text="$17.55"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -43,7 +43,7 @@
                     <TextView
                         android:id="@+id/hourTitle"
                         android:text="@string/hour"
-                        android:layout_below="@+id/priceHour"
+                        android:layout_below="@+id/tvPriceHour"
                         android:layout_width="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_height="wrap_content"
@@ -53,7 +53,7 @@
                 </RelativeLayout>
             </LinearLayout>
             <LinearLayout
-                android:background="@color/loyali"
+                android:background="@color/grey500"
                 android:layout_weight="1"
                 android:layout_marginEnd="2dp"
                 android:layout_marginRight="2dp"
@@ -67,7 +67,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/priceDay"
+                        android:id="@+id/tvPriceDay"
                         android:text="$17.55"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -77,8 +77,8 @@
                         android:textSize="18sp"/>
                     <TextView
                         android:id="@+id/dayTitle"
-                        android:text="@string/hour"
-                        android:layout_below="@+id/priceDay"
+                        android:text="@string/day"
+                        android:layout_below="@+id/tvPriceDay"
                         android:layout_width="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
             </LinearLayout>
 
             <LinearLayout
-                android:background="@color/loyali"
+                android:background="@color/grey500"
                 android:layout_weight="1"
                 android:layout_marginEnd="2dp"
                 android:layout_marginRight="2dp"
@@ -103,7 +103,7 @@
                     android:layout_height="wrap_content">
 
                     <TextView
-                        android:id="@+id/priceWeek"
+                        android:id="@+id/tvPriceWeek"
                         android:text="$17.55"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -113,8 +113,8 @@
                         android:textSize="18sp"/>
                     <TextView
                         android:id="@+id/weekTitle"
-                        android:text="@string/hour"
-                        android:layout_below="@+id/priceWeek"
+                        android:text="@string/week"
+                        android:layout_below="@+id/tvPriceWeek"
                         android:layout_width="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_height="wrap_content"
