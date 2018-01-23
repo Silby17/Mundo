@@ -60,7 +60,9 @@ public class LoginActivity extends Activity {
                                 preferences = getSharedPreferences(PREFS, 0);
                                 preferences.edit().putString("userId", loginResponse.getId()).apply();
                                 preferences.edit().putString("fullName", fullName).apply();
+                                preferences.edit().putString("email", loginResponse.getEmail()).apply();
                                 preferences.edit().putString("userToken", response.headers().get("x-auth")).apply();
+                                preferences.edit().putBoolean("logged-in", true).apply();
                                 Toast.makeText(getApplicationContext(),
                                         R.string.welcomeBack, Toast.LENGTH_SHORT).show();
                                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
