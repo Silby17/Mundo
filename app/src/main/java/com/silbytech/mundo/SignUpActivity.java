@@ -122,6 +122,9 @@ public class SignUpActivity extends Activity {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
                         Bundle userFacebookData = getFacebookData(object);
+                        preferences = getSharedPreferences(PREFS, 0);
+                        preferences.edit().putString("profile_pic_url", userFacebookData.get("profile_pic").toString()).apply();
+
                         Communicator communicator = new Communicator();
                         assert userFacebookData != null;
                         Call<LoginResponse> call = communicator.userSignUp(
