@@ -6,22 +6,34 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <ImageView
-        android:id="@+id/mundoImg"
+    <TextView
+        android:id="@+id/tvTitle"
+        android:textSize="30sp"
         android:layout_centerHorizontal="true"
-        android:layout_width="263dp"
-        android:layout_height="103dp"
-        android:layout_marginTop="16dp"
-        android:src="@drawable/mundo_logo_bg"/>
+        android:layout_marginTop="50dp"
+        android:text="@string/welcome_back_title"
+        android:textColor="@color/black"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
 
     <RelativeLayout
         android:id="@+id/inputFrag"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:layout_below="@+id/mundoImg"
-        android:layout_marginTop="40dp">
+        android:layout_below="@+id/tvTitle"
+        android:layout_marginTop="30dp">
+
+        <EditText
+            android:id="@+id/edtEmail"
+            android:layout_width="287dp"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/edit_text_background"
+            android:layout_marginBottom="4dp"
+            android:ems="10"
+            android:hint="@string/email"
+            android:inputType="textEmailAddress"
+            android:padding="10dp" />
 
         <EditText
             android:id="@+id/edtPassword"
@@ -31,20 +43,11 @@
             android:layout_centerHorizontal="true"
             android:ems="10"
             android:hint="@string/password"
+            android:background="@drawable/edit_text_background"
+            android:layout_marginBottom="4dp"
+            android:padding="10dp"
             android:inputType="textPassword" />
 
-
-        <EditText
-            android:id="@+id/edtEmail"
-            android:layout_width="287dp"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="56dp"
-            android:ems="10"
-            android:hint="@string/email"
-            android:inputType="textEmailAddress" />
     </RelativeLayout>
 
 
