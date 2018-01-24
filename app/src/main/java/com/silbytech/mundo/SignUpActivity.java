@@ -14,6 +14,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.Toast;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -63,6 +64,8 @@ public class SignUpActivity extends Activity {
             }
         });
 
+        final ProgressBar signUpProgressBar = findViewById(R.id.sign_up_progress);
+
 
         callbackManager = CallbackManager.Factory.create();
 
@@ -87,10 +90,12 @@ public class SignUpActivity extends Activity {
                 }
                 else {
                     Communicator communicator = new Communicator();
+                    signUpProgressBar.setVisibility(View.VISIBLE);
                     Call<LoginResponse> call = communicator.userSignUp(firstName, lastName, email, password);
                     call.enqueue(new Callback<LoginResponse>() {
                         @Override
                         public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                            signUpProgressBar.setVisibility(View.GONE);
                             //Response OK From Server
                             if(response.code() == 200){
                                 LoginResponse loginResponse = response.body();
@@ -120,6 +125,7 @@ public class SignUpActivity extends Activity {
                         }
                         @Override
                         public void onFailure(Call<LoginResponse> call, Throwable t) {
+                            signUpProgressBar.setVisibility(View.GONE);
                             Toast.makeText(getApplicationContext(), R.string.errorTryLater,
                                     Toast.LENGTH_SHORT).show();
                         }
