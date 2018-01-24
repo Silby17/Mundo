@@ -21,6 +21,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -73,6 +74,7 @@ public class LoginActivity extends Activity {
             }
         });
 
+        final ProgressBar loginProgess = findViewById(R.id.login_progress);
         this.btnLogin = findViewById(R.id.btnLogin);
         //init the Facebook login button
         this.fbLoginButton = findViewById(R.id.fb_login_button);
@@ -94,11 +96,13 @@ public class LoginActivity extends Activity {
                     Communicator communicator = new Communicator();
                     //Log the user into the server
                     Call<LoginResponse> call = communicator.userLogin(email, password);
+                    loginProgess.setVisibility(View.VISIBLE);
 
                     //Make the call to the Server
                     call.enqueue(new Callback<LoginResponse>() {
                         @Override
                         public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                            loginProgess.setVisibility(View.GONE);
                             if(response.code() == 200){
                                 LoginResponse loginResponse = response.body();
                                 //Build the full name of the Logged in user
@@ -125,6 +129,7 @@ public class LoginActivity extends Activity {
                         }
                         @Override
                         public void onFailure(Call<LoginResponse> call, Throwable t) {
+                            loginProgess.setVisibility(View.GONE);
                             Toast.makeText(getApplicationContext(),
                                     R.string.errorTryLater, Toast.LENGTH_SHORT).show();
                         }
