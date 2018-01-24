@@ -1,7 +1,8 @@
 package com.silbytech.mundo;
 
 import android.app.Application;
-
+import com.facebook.FacebookSdk;
+import com.facebook.appevents.AppEventsLogger;
 import java.io.File;
 
 /************************************
@@ -16,6 +17,8 @@ public class MyApplication extends Application {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        FacebookSdk.sdkInitialize(getApplicationContext());
+        AppEventsLogger.activateApp(this);
     }
 
     public static MyApplication getInstance() {
