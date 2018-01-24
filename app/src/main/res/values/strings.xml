@@ -1,17 +1,26 @@
 <resources>
     <string name="app_name">Mundo</string>
+    <string name="facebook_app_id">180683032535147</string>
+    <string name="fb_login_protocol_scheme">fb180683032535147</string>
     <string name="email">Email</string>
     <string name="password">Password</string>
     <string name="mobileNumber">Mobile Number</string>
     <string name="errorMissingInfo">Login credentials missing</string>
+    <string name="loginError">Login Error, please try again later</string>
+    <string name="userExists">User already exists. Please Login</string>
     <string name="firstName">First Name</string>
     <string name="lastName">Last Name</string>
     <string name="next">NEXT</string>
     <string name="skip">SKIP</string>
     <string name="proceed">PROCEED</string>
     <string name="welcomeBack">Welcome Back!</string>
+    <string name="welcome">WELCOME</string>
+    <string name="forgot_password">Forgot your password?</string>
+    <string name="sign_up_to_get_started">Sign up to get started</string>
+    <string name="welcome_back_title">WELCOME BACK</string>
     <string name="detailsError">Please check your credentials</string>
     <string name="errorTryLater">Server Error, Please try later.</string>
+    <string name="missingFBData">Missing Facebook Data, please try again</string>
     <string name="or">or</string>
     <string name="login">Login</string>
     <string name="cancel">Cancel</string>
@@ -41,10 +50,10 @@
     <string name="book_now">Book Now</string>
     <string name="back">Back</string>
     <string name="listing">Listing</string>
+    <string name="register">Register</string>
 
 
-    <integer-array name="img_id_arr">
-    </integer-array>
+    <integer-array name="img_id_arr"></integer-array>
 
     <string-array name="categories">
         <item>Bicycle</item>
@@ -52,4 +61,5 @@
     </string-array>
 
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="title_activity_main2">Main2Activity</string>
 </resources>
