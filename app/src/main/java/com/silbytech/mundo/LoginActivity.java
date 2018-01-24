@@ -20,6 +20,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import org.json.JSONException;
@@ -53,7 +55,26 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.login_layout);
         callbackManager = CallbackManager.Factory.create();
 
+        ImageView backImgButton = findViewById(R.id.imgBackArrow);
+        //Will close the activity when the back arrow is clicked
+        backImgButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                LoginActivity.this.finish();
+            }
+        });
+
+        TextView forgotPassword = findViewById(R.id.tvForgotPassword);
+        //Will open a new activity which will recover a users password
+        forgotPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getApplicationContext(), R.string.forgot_password, Toast.LENGTH_SHORT).show();
+            }
+        });
+
         this.btnLogin = findViewById(R.id.btnLogin);
+        //init the Facebook login button
         this.fbLoginButton = findViewById(R.id.fb_login_button);
         fbLoginButton.setReadPermissions("email");
 
@@ -63,21 +84,26 @@ public class LoginActivity extends Activity {
                 final String email = ((EditText)findViewById(R.id.edtEmail)).getText().toString();
                 final String password = ((EditText)findViewById(R.id.edtPassword)).getText().toString();
 
+                //Checks that the user has entered in all their details
                 if(email.equals("") || password.equals("")){
                     Toast.makeText(getApplicationContext(),
                             R.string.errorMissingInfo, Toast.LENGTH_SHORT).show();
                 }
                 else {
-
+                    //Create a new server communicator
                     Communicator communicator = new Communicator();
+                    //Log the user into the server
                     Call<LoginResponse> call = communicator.userLogin(email, password);
 
+                    //Make the call to the Server
                     call.enqueue(new Callback<LoginResponse>() {
                         @Override
                         public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                             if(response.code() == 200){
                                 LoginResponse loginResponse = response.body();
+                                //Build the full name of the Logged in user
                                 String fullName = loginResponse.getFirstName() + " " + loginResponse.getSurname();
+                                //Saves the below info to shared preferences
                                 preferences = getSharedPreferences(PREFS, 0);
                                 preferences.edit().putString("userId", loginResponse.getId()).apply();
                                 preferences.edit().putString("fullName", fullName).apply();
@@ -86,8 +112,11 @@ public class LoginActivity extends Activity {
                                 preferences.edit().putBoolean("logged-in", true).apply();
                                 Toast.makeText(getApplicationContext(),
                                         R.string.welcomeBack, Toast.LENGTH_SHORT).show();
+                                //Starts the main Activity
                                 Intent i = new Intent(LoginActivity.this, MainActivity.class);
                                 startActivity(i);
+                                //Finishes the login activity
+                                LoginActivity.this.finish();
                             }
                             else if(response.code() == 400){
                                 Toast.makeText(getApplicationContext(),
@@ -104,31 +133,39 @@ public class LoginActivity extends Activity {
             }
         });
 
-
-
+        //Facebook login callback Registration
         this.fbLoginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
             @Override
             public void onSuccess(LoginResult loginResult) {
                 GraphRequest request = GraphRequest.newMeRequest(loginResult.getAccessToken(), new GraphRequest.GraphJSONObjectCallback() {
                     @Override
                     public void onCompleted(JSONObject object, GraphResponse response) {
-                        Bundle facebookData = getFacebookData(object);
+                        //Gets all the Users Data from the object response
                         Bundle userFacebookData = getFacebookData(object);
                         preferences = getSharedPreferences(PREFS, 0);
-                        preferences.edit().putString("profile_pic_url", userFacebookData.get("profile_pic").toString()).apply();
+                        preferences.edit().putString("profile_pic_url",
+                                userFacebookData.get("profile_pic").toString()).apply();
 
+                        //Creates a new Server communicator
                         Communicator communicator = new Communicator();
-                        assert userFacebookData != null;
-                        Call<LoginResponse> call = communicator.userLogin(
-                                userFacebookData.get("email").toString(),
-                                userFacebookData.get("id").toString());
+                        if(userFacebookData.get("email").toString() != null
+                                && userFacebookData.get("id").toString() != null){
 
-                        call.enqueue(new Callback<LoginResponse>() {
+                            //Creates a login call to the server
+                            Call<LoginResponse> call = communicator.userLogin(
+                                    userFacebookData.get("email").toString(),
+                                    userFacebookData.get("id").toString());
+
+                            //Makes the Login request to the server
+                            call.enqueue(new Callback<LoginResponse>() {
                             @Override
                             public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
                                 if(response.code() == 200){
                                     LoginResponse loginResponse = response.body();
+                                    assert loginResponse != null;
+                                    //Makes the full name of the user String
                                     String fullName = loginResponse.getFirstName() + " " + loginResponse.getSurname();
+                                    //Saves the below info into shared preferences
                                     preferences = getSharedPreferences(PREFS, 0);
                                     preferences.edit().putString("userId", loginResponse.getId()).apply();
                                     preferences.edit().putString("fullName", fullName).apply();
@@ -151,7 +188,11 @@ public class LoginActivity extends Activity {
                                 Toast.makeText(getApplicationContext(),
                                         R.string.errorTryLater, Toast.LENGTH_SHORT).show();
                             }
-                        });
+                            });
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), R.string.missingFBData,Toast.LENGTH_SHORT).show();
+                        }
                     }
                 });
                 Bundle parameters = new Bundle();
@@ -208,6 +249,13 @@ public class LoginActivity extends Activity {
         return null;
     }
 
+
+    /************************************************************************
+     * This function will handel the result from the Facebook Login
+     * @param requestCode - request Code
+     * @param resultCode - result code
+     * @param data - data from Intent
+     ***********************************************************************/
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         callbackManager.onActivityResult(requestCode, resultCode, data);
