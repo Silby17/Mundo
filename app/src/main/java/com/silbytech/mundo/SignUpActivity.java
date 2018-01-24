@@ -3,13 +3,17 @@ package com.silbytech.mundo;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.Toast;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -48,7 +52,18 @@ public class SignUpActivity extends Activity {
         requestWindowFeature(Window.FEATURE_NO_TITLE);
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
                 WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
         setContentView(R.layout.sign_up_layout);
+        ImageView backImgButton = findViewById(R.id.imgBackArrow);
+
+        backImgButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                SignUpActivity.this.finish();
+            }
+        });
+
+
         callbackManager = CallbackManager.Factory.create();
 
         this.btnSignUp = findViewById(R.id.btnSignUp);
@@ -126,46 +141,56 @@ public class SignUpActivity extends Activity {
                         preferences.edit().putString("profile_pic_url", userFacebookData.get("profile_pic").toString()).apply();
 
                         Communicator communicator = new Communicator();
-                        assert userFacebookData != null;
-                        Call<LoginResponse> call = communicator.userSignUp(
-                                userFacebookData.get("first_name").toString(),
-                                userFacebookData.get("last_name").toString(),
-                                userFacebookData.get("email").toString(),
-                                userFacebookData.get("id").toString());
+                        if(userFacebookData.get("first_name").toString() != null &&
+                        userFacebookData.get("last_name").toString() != null &&
+                                userFacebookData.get("email").toString() != null &&
+                                userFacebookData.get("id").toString() != null){
 
-                        call.enqueue(new Callback<LoginResponse>() {
-                            @Override
-                            public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
-                                if(response.code() == 200){
-                                    LoginResponse loginResponse = response.body();
-                                    String fullName = loginResponse.getFirstName() + " " + loginResponse.getSurname();
-                                    preferences = getSharedPreferences(PREFS, 0);
-                                    preferences.edit().putBoolean("logged-in", true).apply();
-                                    preferences.edit().putString("userId", loginResponse.getId()).apply();
-                                    preferences.edit().putString("fullName", fullName).apply();
-                                    preferences.edit().putString("token", response.headers().get("x-auth")).apply();
-                                    Intent i = new Intent(getApplicationContext(), MainActivity.class);
-                                    startActivity(i);
-                                    finish();
-                                }
-                                else if(response.code() == 409){
-                                    Toast.makeText(getApplicationContext(), R.string.userExists, Toast.LENGTH_SHORT).show();
-                                    LoginManager.getInstance().logOut();
-                                }
+                            Call<LoginResponse> call = communicator.userSignUp(
+                                    userFacebookData.get("first_name").toString(),
+                                    userFacebookData.get("last_name").toString(),
+                                    userFacebookData.get("email").toString(),
+                                    userFacebookData.get("id").toString());
 
-                                else if(response.code() == 400){
-                                    Toast.makeText(getApplicationContext(), R.string.detailsError, Toast.LENGTH_SHORT).show();
-                                    LoginManager.getInstance().logOut();
+                            call.enqueue(new Callback<LoginResponse>() {
+                                @Override
+                                public void onResponse(Call<LoginResponse> call, Response<LoginResponse> response) {
+                                    if(response.code() == 200){
+                                        LoginResponse loginResponse = response.body();
+                                        String fullName = loginResponse.getFirstName() + " " + loginResponse.getSurname();
+                                        preferences = getSharedPreferences(PREFS, 0);
+                                        preferences.edit().putBoolean("logged-in", true).apply();
+                                        preferences.edit().putString("userId", loginResponse.getId()).apply();
+                                        preferences.edit().putString("fullName", fullName).apply();
+                                        preferences.edit().putString("token", response.headers().get("x-auth")).apply();
+                                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                                        startActivity(i);
+                                        finish();
+                                    }
+                                    else if(response.code() == 409){
+                                        Toast.makeText(getApplicationContext(), R.string.userExists, Toast.LENGTH_SHORT).show();
+                                        LoginManager.getInstance().logOut();
+                                    }
+
+                                    else if(response.code() == 400){
+                                        Toast.makeText(getApplicationContext(), R.string.detailsError, Toast.LENGTH_SHORT).show();
+                                        LoginManager.getInstance().logOut();
+                                    }
+                                    else {
+                                        Toast.makeText(getApplicationContext(), R.string.errorTryLater, Toast.LENGTH_SHORT).show();
+                                    }
                                 }
-                                else {
-                                    Toast.makeText(getApplicationContext(), R.string.errorTryLater, Toast.LENGTH_SHORT).show();
+                                @Override
+                                public void onFailure(Call<LoginResponse> call, Throwable t) {
+                                    Toast.makeText(getApplicationContext(), R.string.errorTryLater,Toast.LENGTH_SHORT).show();
                                 }
-                            }
-                            @Override
-                            public void onFailure(Call<LoginResponse> call, Throwable t) {
-                                Toast.makeText(getApplicationContext(), R.string.errorTryLater,Toast.LENGTH_SHORT).show();
-                            }
-                        });
+                            });
+                        }
+                        else {
+                            Toast.makeText(getApplicationContext(), R.string.missingFBData,Toast.LENGTH_SHORT).show();
+                        }
+
+
                     }
                 });
                 Bundle parameters = new Bundle();
