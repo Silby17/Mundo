@@ -1,8 +1,10 @@
 package com.silbytech.mundo;
 
 import android.content.Context;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -30,6 +32,7 @@ public class UserListingFragment extends Fragment {
     private static final String USER_TOKEN = "userToken";
     private ArrayList<ListingModel> userListings;
     private String userToken;
+    FloatingActionButton addListingButton;
     private String userId;
 
 
@@ -61,6 +64,15 @@ public class UserListingFragment extends Fragment {
         View proView =  inflater.inflate(R.layout.fragment_user_listing, container, false);
         final ProgressBar progressBar = proView.findViewById(R.id.load_progress);
         final ListView userListingListView = proView.findViewById(R.id.userListingListView);
+        addListingButton = proView.findViewById(R.id.addListingFloatingActionButton);
+
+        addListingButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(getContext(), ChooseCategoryActivity.class);
+                getContext().startActivity(i);
+            }
+        });
 
         Communicator communicator = new Communicator();
         Call<ListingsList> call = communicator.getUsersListings(userToken);
