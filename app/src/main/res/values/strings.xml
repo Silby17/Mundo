@@ -51,6 +51,7 @@
     <string name="back">Back</string>
     <string name="listing">Listing</string>
     <string name="register">Register</string>
+    <string name="pick_category">Pick a category</string>
 
 
     <integer-array name="img_id_arr"></integer-array>
@@ -58,8 +59,36 @@
     <string-array name="categories">
         <item>Bicycle</item>
         <item>Photography</item>
+        <item>Camera</item>
     </string-array>
 
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="title_activity_main2">Main2Activity</string>
+    <string-array name="steps_array">
+        <item>Category</item>
+        <item>Type</item>
+        <item>Extras</item>
+        <item>Title</item>
+        <item>Prices</item>
+        <item>Images</item>
+        <item>Location</item>
+    </string-array>
+
+    <string-array name="bicycle_types">
+        <item>Mountain</item>
+        <item>Road</item>
+        <item>Children's</item>
+        <item>Children's Bike</item>
+        <item>Fixed Gear</item>
+        <item>Other</item>
+    </string-array>
+
+    <string-array name="photography_types">
+        <item>Camera</item>
+        <item>Lenses</item>
+        <item>Accessories</item>
+    </string-array>
+
+    <string-array name="surfboard_types">
+        <item>Shortboard</item>
+        <item>Longboard</item>
+    </string-array>
 </resources>
