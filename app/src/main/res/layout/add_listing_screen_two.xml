@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@drawable/add_listing_background"
+    android:layout_height="match_parent">
+
+
+    <com.shuhart.stepview.StepView
+        android:id="@+id/stepsViewTwo"
+        android:background="@color/mundo_blue"
+        android:paddingEnd="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="90dp" />
+
+    <ScrollView
+        android:fillViewport="true"
+        android:layout_below="@+id/stepsViewTwo"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvPageTitle"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginTop="3dp"
+                android:text="@string/details"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/edtTitle"
+                android:layout_centerHorizontal="true"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginEnd="4dp"
+                android:hint="@string/title"
+                android:backgroundTint="@color/mundo_blue"
+                android:layout_below="@id/tvPageTitle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <EditText
+                android:id="@+id/edtDescription"
+                android:layout_below="@+id/edtTitle"
+                android:hint="@string/description"
+                android:inputType="textMultiLine"
+                android:layout_centerHorizontal="true"
+                android:backgroundTint="@color/mundo_blue"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginEnd="4dp"
+                android:lines="4"
+                android:gravity="top"
+                android:scrollbars="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+            <fragment
+                android:layout_below="@+id/edtDescription"
+                android:id="@+id/place_autocomplete_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:name="com.google.android.gms.location.places.ui.PlaceAutocompleteFragment" />
+
+            <include
+                android:layout_below="@+id/place_autocomplete_fragment"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                layout="@layout/map_frag"/>
+
+            <Button
+                android:text="@string/next"
+                android:layout_alignParentBottom="true"
+                android:layout_width="match_parent"
+                android:layout_height="60dp" />
+        </RelativeLayout>
+
+    </ScrollView>
+
+
+
+
+
+</RelativeLayout>
