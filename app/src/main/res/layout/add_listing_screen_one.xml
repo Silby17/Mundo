@@ -2,12 +2,12 @@
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:background="@drawable/edit_text_background"
+    android:background="@drawable/add_listing_background"
     android:layout_height="match_parent">
 
             <com.shuhart.stepview.StepView
                 android:id="@+id/stepsView"
-                android:background="#008bbd"
+                android:background="@color/mundo_blue"
                 android:paddingEnd="5dp"
                 android:paddingLeft="5dp"
                 android:paddingRight="5dp"
@@ -47,7 +47,7 @@
 
 
             <ListView
-                android:id="@+id/choose_type"
+                android:id="@+id/choose_type_list"
                 android:choiceMode="singleChoice"
                 android:listSelector="@android:color/darker_gray"
                 android:layout_below="@+id/tvType"
@@ -55,12 +55,10 @@
                 android:layout_height="wrap_content">
             </ListView>
 
-
-
-
     <Button
+        android:id="@+id/btnNextStepOne"
         android:text="@string/next"
         android:layout_alignParentBottom="true"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="60dp" />
 </RelativeLayout>
