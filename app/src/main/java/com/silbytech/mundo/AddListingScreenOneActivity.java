@@ -1,25 +1,17 @@
 package com.silbytech.mundo;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.view.View;
-import android.view.Window;
-import android.view.WindowManager;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import com.shuhart.stepview.StepView;
-
-import org.w3c.dom.Text;
-
-import java.lang.reflect.Array;
-import java.util.ArrayList;
+import com.silbytech.mundo.entities.ListingModel;
 import java.util.Arrays;
 import java.util.List;
 
@@ -27,18 +19,25 @@ import java.util.List;
 /************************************
  * Created by Yosef Silberhaft
  ************************************/
-public class ChooseCategoryActivity extends Activity {
+public class AddListingScreenOneActivity extends Activity {
+    ListingModel newListing;
+    Button btnNextStep;
+    boolean typeFlag = false;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.choose_category_layout);
+        setContentView(R.layout.add_listing_screen_one);
 
         ListView categoriesList = findViewById(R.id.choose_categories_listView);
         final TextView tvType = findViewById(R.id.tvType);
         tvType.setVisibility(View.GONE);
-        final ListView typeList = findViewById(R.id.choose_type);
+        final ListView typeList = findViewById(R.id.choose_type_list);
         final StepView stepsView = findViewById(R.id.stepsView);
+        btnNextStep = findViewById(R.id.btnNextStepOne);
+        btnNextStep.setVisibility(View.GONE);
+
+        newListing = new ListingModel();
 
         DisplayMetrics dm = new DisplayMetrics();
         getWindowManager().getDefaultDisplay().getMetrics(dm);
@@ -63,37 +62,75 @@ public class ChooseCategoryActivity extends Activity {
                 // other state methods are equal to the corresponding xml attributes
                 .commit();
 
-
-
-
         ArrayAdapter<CharSequence> categoriesAdapter = ArrayAdapter
                 .createFromResource(this, R.array.categories, android.R.layout.simple_list_item_1);
 
         categoriesList.setAdapter(categoriesAdapter);
 
+        //Listener for the Category item List
         categoriesList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //Gets the string of the clicked item
                 String it = adapterView.getItemAtPosition(i).toString();
                 tvType.setVisibility(View.VISIBLE);
                 if(adapterView.getItemAtPosition(i).equals("Bicycle")){
+                    changeFlagStatus(false);
                     ArrayAdapter<CharSequence> bicycleTypeAdapter = ArrayAdapter
                             .createFromResource(getApplicationContext(), R.array.bicycle_types,
                                     android.R.layout.simple_list_item_1);
                     typeList.setAdapter(bicycleTypeAdapter);
-
+                    newListing.setCategory(it);
                 }
                 else if(adapterView.getItemAtPosition(i).equals("Photography")){
+                    changeFlagStatus(false);
                     ArrayAdapter<CharSequence> photographyTypeAdapter = ArrayAdapter
                             .createFromResource(getApplicationContext(), R.array.photography_types,
                                     android.R.layout.simple_list_item_1);
                     typeList.setAdapter(photographyTypeAdapter);
+                    newListing.setCategory(it);
+                }
+                else if(adapterView.getItemAtPosition(i).equals("Surfing")){
+                    changeFlagStatus(false);
+                    ArrayAdapter<CharSequence> photographyTypeAdapter = ArrayAdapter
+                            .createFromResource(getApplicationContext(), R.array.surfboard_types,
+                                    android.R.layout.simple_list_item_1);
+                    typeList.setAdapter(photographyTypeAdapter);
+                    newListing.setCategory(it);
 
                 }
-
-                Toast.makeText(getApplicationContext(), it, Toast.LENGTH_SHORT).show();
-                stepsView.go(2, true);
             }
         });
+
+        //Listener for the Type items list
+        typeList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
+                //Gets the string of the clicked item
+                String item = adapterView.getItemAtPosition(i).toString();
+                changeFlagStatus(true);
+                newListing.setType(item);
+
+            }
+        });
+
+        btnNextStep.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent i = new Intent(AddListingScreenOneActivity.this, AddListingScreenTwoActivity.class);
+                i.putExtra("NewListing", newListing);
+                startActivity(i);
+            }
+        });
+    }
+
+    public void changeFlagStatus(boolean status){
+        typeFlag = status;
+        if(typeFlag){
+            btnNextStep.setVisibility(View.VISIBLE);
+        }
+        else {
+            btnNextStep.setVisibility(View.GONE);
+        }
     }
 }
