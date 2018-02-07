@@ -1,15 +1,12 @@
 package com.silbytech.mundo;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.location.Address;
 import android.location.Geocoder;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
-import android.support.v7.app.AppCompatActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
-
 import com.google.android.gms.common.api.Status;
 import com.google.android.gms.location.places.Place;
 import com.google.android.gms.location.places.ui.PlaceAutocomplete;
@@ -23,7 +20,6 @@ import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.shuhart.stepview.StepView;
 import com.silbytech.mundo.entities.ListingModel;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -41,13 +37,10 @@ public class AddListingScreenTwoActivity extends FragmentActivity implements OnM
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
         setContentView(R.layout.add_listing_screen_two);
 
         final StepView stepsView = findViewById(R.id.stepsViewTwo);
-
         newListing = (ListingModel)getIntent().getSerializableExtra("NewListing");
-
 
         //Display the screen in a pop-up overlay of the screen
         DisplayMetrics dm = new DisplayMetrics();
@@ -60,7 +53,6 @@ public class AddListingScreenTwoActivity extends FragmentActivity implements OnM
 
 
         List<String> stepsArray = Arrays.asList(getResources().getStringArray(R.array.steps_array));
-
         stepsView.getState()
                 .selectedTextColor(getApplicationContext().getResources().getColor(R.color.black))
                 .doneTextColor(getApplicationContext().getResources().getColor(R.color.white))
@@ -72,16 +64,18 @@ public class AddListingScreenTwoActivity extends FragmentActivity implements OnM
                 .animationDuration(getResources().getInteger(android.R.integer.config_shortAnimTime))
                 // other state methods are equal to the corresponding xml attributes
                 .commit();
+        stepsView.go(1, true);
 
-        stepsView.go(2, true);
-
+        //Init the Support Fragment For the Map
         SupportMapFragment mapFragment = (SupportMapFragment) getSupportFragmentManager()
                 .findFragmentById(R.id.map);
         mapFragment.getMapAsync(this);
 
+        //Init the PlaceAutoCompleteFragment for the autocomplete GoogleMaps search
         PlaceAutocompleteFragment autocompleteFragment = (PlaceAutocompleteFragment)
                 getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
 
+        //The Google-Maps auto complete handler
         autocompleteFragment.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
@@ -89,15 +83,13 @@ public class AddListingScreenTwoActivity extends FragmentActivity implements OnM
                 LatLng pickedPlace = place.getLatLng();
                 changeLocation(pickedPlace);
             }
-
             @Override
             public void onError(Status status) {
                 Log.i(TAG, "An error occurred: " + status);
             }
         });
-
-
     }
+
 
     public void changeLocation(LatLng currentPosition){
         mMap.addMarker(new MarkerOptions().position(currentPosition)
@@ -106,12 +98,13 @@ public class AddListingScreenTwoActivity extends FragmentActivity implements OnM
         mMap.setMinZoomPreference(13.0f);
     }
 
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
         Geocoder gc = new Geocoder(getApplicationContext());
         List<Address> addresses = new ArrayList<>();
         try {
-            addresses = gc.getFromLocationName("Yoni Netanyahu 20 Givat Shmuel", 5);
+            addresses = gc.getFromLocationName("Tel Aviv Israel", 2);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -125,6 +118,7 @@ public class AddListingScreenTwoActivity extends FragmentActivity implements OnM
                 .title("Listing"));
         mMap.moveCamera(CameraUpdateFactory.newLatLng(listingLocation));
     }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -140,6 +134,4 @@ public class AddListingScreenTwoActivity extends FragmentActivity implements OnM
             }
         }
     }
-
-
 }
