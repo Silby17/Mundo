@@ -52,31 +52,21 @@
     <string name="listing">Listing</string>
     <string name="register">Register</string>
     <string name="pick_category">Pick a category</string>
+    <string name="pick_type">Pick a type</string>
+    <string name="details">Details</string>
+    <string name="title">Title</string>
 
-
-    <integer-array name="img_id_arr"></integer-array>
-
+    <!-- String array definitions -->
     <string-array name="categories">
         <item>Bicycle</item>
         <item>Photography</item>
-        <item>Camera</item>
-    </string-array>
-
-    <string-array name="steps_array">
-        <item>Category</item>
-        <item>Type</item>
-        <item>Extras</item>
-        <item>Title</item>
-        <item>Prices</item>
-        <item>Images</item>
-        <item>Location</item>
+        <item>Surfing</item>
     </string-array>
 
     <string-array name="bicycle_types">
         <item>Mountain</item>
         <item>Road</item>
-        <item>Children's</item>
-        <item>Children's Bike</item>
+        <item>Children</item>
         <item>Fixed Gear</item>
         <item>Other</item>
     </string-array>
@@ -91,4 +81,13 @@
         <item>Shortboard</item>
         <item>Longboard</item>
     </string-array>
+
+    <!-- Steps Array Definitions -->
+    <string-array name="steps_array">
+        <item>Type</item>
+        <item>Details</item>
+        <item>Prices</item>
+        <item>Images</item>
+    </string-array>
+
 </resources>
