@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/add_listing_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.shuhart.stepview.StepView
+        android:id="@+id/stepsViewThree"
+        android:background="@color/mundo_blue"
+        android:paddingEnd="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_width="wrap_content"
+        android:layout_height="90dp" />
+
+    <ScrollView
+        android:fillViewport="true"
+        android:layout_below="@+id/stepsViewThree"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvPageTitle"
+                android:layout_centerHorizontal="true"
+                android:textColor="@color/black"
+                android:textSize="18sp"
+                android:layout_marginTop="3dp"
+                android:typeface="serif"
+                android:text="@string/addPhoto"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+
+            <ImageView
+                android:id="@+id/imgUpload"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="5dp"
+                android:layout_marginEnd="5dp"
+                android:layout_marginTop="3dp"
+                android:layout_below="@+id/tvPageTitle"
+                android:layout_width="match_parent"
+                android:layout_height="110dp" />
+
+            <Button
+                android:id="@+id/btn_select_image"
+                android:layout_below="@+id/imgUpload"
+                android:layout_centerHorizontal="true"
+                style="@style/Widget.AppCompat.Button.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="47dp"
+                android:text="@string/select_image_to_upload" />
+
+
+        </RelativeLayout>
+
+
+
+
+
+
+    </ScrollView>
+
+</RelativeLayout>
