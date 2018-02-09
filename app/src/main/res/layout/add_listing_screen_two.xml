@@ -3,7 +3,7 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:background="@drawable/add_listing_background"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="wrap_content">
 
 
     <com.shuhart.stepview.StepView
@@ -22,44 +22,44 @@
 
     <ScrollView
         android:fillViewport="true"
+        android:scrollbars="vertical"
         android:layout_below="@+id/stepsViewTwo"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <RelativeLayout
+        <LinearLayout
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
 
             <TextView
                 android:id="@+id/tvPageTitle"
-                android:layout_centerHorizontal="true"
                 android:textColor="@color/black"
-                android:textSize="18sp"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginTop="3dp"
                 android:typeface="serif"
+                android:textSize="18sp"
                 android:text="@string/details"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content" />
 
             <EditText
                 android:id="@+id/edtTitle"
-                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
                 android:layout_marginStart="4dp"
                 android:layout_marginLeft="4dp"
                 android:layout_marginRight="4dp"
                 android:layout_marginEnd="4dp"
                 android:hint="@string/title"
                 android:backgroundTint="@color/mundo_blue"
-                android:layout_below="@id/tvPageTitle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content" />
 
             <EditText
                 android:id="@+id/edtDescription"
-                android:layout_below="@+id/edtTitle"
+                android:layout_gravity="center_horizontal"
                 android:hint="@string/description"
                 android:inputType="textMultiLine"
-                android:layout_centerHorizontal="true"
                 android:backgroundTint="@color/mundo_blue"
                 android:layout_marginStart="4dp"
                 android:layout_marginLeft="4dp"
@@ -72,9 +72,8 @@
                 android:layout_height="wrap_content" />
 
             <TextView
-                android:layout_below="@+id/edtDescription"
                 android:id="@+id/tvImgTitle"
-                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
                 android:textColor="@color/black"
                 android:textSize="18sp"
                 android:layout_marginTop="2dp"
@@ -92,30 +91,27 @@
                 android:layout_marginRight="5dp"
                 android:layout_marginEnd="5dp"
                 android:layout_marginTop="3dp"
-                android:layout_below="@+id/tvImgTitle"
                 android:layout_width="match_parent"
                 android:layout_height="130dp" />
 
             <Button
                 android:id="@+id/btnSelectImage"
-                android:layout_below="@+id/imgUpload"
-                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
                 android:background="@color/mundo_blue"
                 android:layout_marginTop="6dp"
                 android:textColor="@color/white"
                 android:layout_width="150dp"
-                android:layout_height="47dp"
+                android:layout_height="45dp"
                 android:text="@string/select_image_to_upload" />
 
             <Button
                 android:id="@+id/btnNext"
                 android:text="@string/next"
-                android:layout_alignParentBottom="true"
+                android:layout_gravity="bottom"
                 android:layout_width="match_parent"
                 android:layout_height="60dp" />
-        </RelativeLayout>
 
+
+        </LinearLayout>
     </ScrollView>
-
-
 </RelativeLayout>
