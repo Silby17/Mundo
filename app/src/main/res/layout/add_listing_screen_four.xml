@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="@drawable/add_listing_background"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <com.shuhart.stepview.StepView
+        android:id="@+id/stepsViewFour"
+        android:background="@color/mundo_blue"
+        android:paddingEnd="5dp"
+        android:paddingLeft="5dp"
+        android:paddingRight="5dp"
+        android:layout_marginRight="1dp"
+        android:layout_marginEnd="1dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginLeft="1dp"
+        android:layout_marginTop="1dp"
+        android:layout_width="wrap_content"
+        android:layout_height="80dp" />
+
+    <RelativeLayout
+        android:layout_below="@+id/stepsViewFour"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+
+        <Button
+            android:id="@+id/btnFinish"
+            android:text="@string/next"
+            android:layout_alignParentBottom="true"
+            android:layout_width="match_parent"
+            android:layout_height="60dp" />
+
+
+    </RelativeLayout>
+
+</RelativeLayout>
