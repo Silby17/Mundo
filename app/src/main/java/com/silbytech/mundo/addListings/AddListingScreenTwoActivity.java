@@ -1,4 +1,4 @@
-package com.silbytech.mundo;
+package com.silbytech.mundo.addListings;
 
 import android.app.Activity;
 import android.app.AlertDialog;
@@ -12,11 +12,14 @@ import android.provider.MediaStore;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.shuhart.stepview.StepView;
+import com.silbytech.mundo.R;
 import com.silbytech.mundo.entities.ListingModel;
 
 import java.io.ByteArrayOutputStream;
@@ -40,8 +43,9 @@ public class AddListingScreenTwoActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.add_listing_screen_two);
         Button btnNext = findViewById(R.id.btnNext);
-        EditText listingTitle = findViewById(R.id.edtTitle);
-        EditText listingDesc = findViewById(R.id.edtDescription);
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        final EditText listingTitle = findViewById(R.id.edtTitle);
+        final EditText listingDesc = findViewById(R.id.edtDescription);
         ImageView listingImg = findViewById(R.id.imgUpload);
         Button btnChooseImg = findViewById(R.id.btnSelectImage);
 
@@ -68,9 +72,17 @@ public class AddListingScreenTwoActivity extends Activity {
         btnNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent i = new Intent(AddListingScreenTwoActivity.this, AddListingScreenThreeActivity.class);
-                i.putExtra("NewListing", newListing);
-                startActivity(i);
+
+                if(listingTitle.getText().toString().equals("") || listingDesc.getText().toString().equals("")){
+                    Toast.makeText(getApplicationContext(), R.string.please_fill_all_boxes, Toast.LENGTH_SHORT).show();
+                }
+                else{
+                    newListing.setTitle(listingTitle.getText().toString());
+                    newListing.setDescription(listingDesc.getText().toString());
+                    Intent i = new Intent(AddListingScreenTwoActivity.this, AddListingScreenThreeActivity.class);
+                    i.putExtra("NewListing", newListing);
+                    startActivity(i);
+                }
             }
         });
     }

@@ -1,4 +1,4 @@
-package com.silbytech.mundo;
+package com.silbytech.mundo.addListings;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.TextView;
 import com.shuhart.stepview.StepView;
+import com.silbytech.mundo.R;
 import com.silbytech.mundo.entities.ListingModel;
 import java.util.Arrays;
 import java.util.List;
